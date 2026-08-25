@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-canvas: #F4FAFB;
+  --color-brand-dark: #080B10;
+  --color-brand-surface: #111820;
+  --color-brand-border: #263640;
+  --color-brand-border-light: #DCE8EB;
+  --color-brand-gold: #61C8D4;
+  --color-brand-mint: #61C8D4;
+  --color-brand-coral: #FF7B7B;
+  --color-brand-coral-accent: #FF2E63;
+  --color-brand-slate: #4A5568;
+  --color-brand-emerald: #FF2D5D;
+  --color-brand-sage: #8CA2AD;
+
+  --color-canvas: #F4FAFB;
+  --color-bg-light: #F4FAFB;
+  --color-surface-white: #FFFFFF;
+  --color-card-dark: #080B10;
+  --color-card-cypress: #111820;
+  --color-border-light: #DCE8EB;
+  --color-text-main: #080B10;
+  --color-text-muted: #4A5568;
+  --color-accent-green: #FF2D5D;
+  --color-accent-emerald: #FF2D5D;
+  --color-accent-gold: #61C8D4;
+  --color-accent-mint: #61C8D4;
+  --color-accent-coral: #FF7B7B;
+
+  --font-sans: "DM Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "DM Serif Display", "Playfair Display", Georgia, serif;
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+:root {
+  --canvas: #F4FAFB;
+  --bg-light: #F4FAFB;
+  --surface-white: #FFFFFF;
+  --card-dark: #080B10;
+  --emerald-dark: #080B10;
+  --emerald-sub: #111820;
+  --emerald-border: #263640;
+  --border-light: #DCE8EB;
+  --text-main: #080B10;
+  --text-muted: #4A5568;
+  --accent-green: #FF2D5D;
+  --accent-emerald: #FF2D5D;
+  --accent-gold: #61C8D4;
+  --accent-mint: #61C8D4;
+  --accent-coral: #FF7B7B;
+  --accent-sage: #8CA2AD;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    background-color: #F4FAFB;
+    color: #080B10;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100%;
+    overscroll-behavior-y: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  section,
+  [id] {
+    scroll-margin-top: 88px;
+  }
+
+  ::selection {
+    background-color: #080B10;
+    color: #61C8D4;
+  }
+}
+
+/* Keep scrolling accessible for visitors who disable motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom Animated Glow & Grid Patterns */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(97, 200, 212, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(97, 200, 212, 0.16) 1px, transparent 1px);
+}
+
+.bg-grid-pattern-light {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(8, 11, 16, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 11, 16, 0.06) 1px, transparent 1px);
+}
+
+/* Custom Smooth Transitions */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
