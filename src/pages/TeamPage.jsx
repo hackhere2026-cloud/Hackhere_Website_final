@@ -1,7 +1,7 @@
 // src/pages/TeamPage.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { Linkedin, Twitter, Github, Heart, Users, ArrowRight, Sparkles, ArrowUpRight } from "lucide-react";
+import { Linkedin, Twitter, Github, Heart, Users, ArrowRight, Sparkles, ArrowUpRight, User } from "lucide-react";
 import { communityFounders, communityTeams } from "../data/hackhereData";
 import CTABanner from "../components/CTABanner";
 
@@ -91,82 +91,78 @@ export default function TeamPage() {
               MEET OUR SQUADS
             </h2>
             <p className="text-base text-[#4A5568] font-light font-sans">
-              Two dedicated leads driving each core function across Design, Tech, Media, and Volunteers.
+              Dedicated leads driving each core function across Technical, Design, and Field Work teams.
             </p>
           </div>
 
           <div className="space-y-16">
-            {/* DESIGN */}
+            {/* TECHNICAL */}
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-3">
-                <h3 className="text-2xl font-serif font-light text-[#080B10]">DESIGN TEAM</h3>
-                <span className="text-xs font-mono text-[#FF2D5D] font-bold">2 MEMBERS</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {communityTeams.design.map((m) => (
-                  <div key={m.id} className="group bg-[#F4FAFB] p-5 rounded-2xl border border-[#DCE8EB] hover:border-[#080B10] transition-all">
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-[#111820]">
-                      <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <h4 className="text-lg font-serif font-medium text-[#080B10]">{m.name}</h4>
-                    <p className="text-xs font-mono text-[#4A5568] uppercase mt-0.5">{m.role}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* TECH */}
-            <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-3">
-                <h3 className="text-2xl font-serif font-light text-[#080B10]">TECH TEAM</h3>
-                <span className="text-xs font-mono text-[#FF2D5D] font-bold">2 MEMBERS</span>
+                <h3 className="text-2xl font-serif font-light text-[#080B10]">TECHNICAL TEAM</h3>
+                <span className="text-xs font-mono text-[#FF2D5D] font-bold">{communityTeams.tech.length} MEMBERS</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {communityTeams.tech.map((m) => (
                   <div key={m.id} className="group bg-[#F4FAFB] p-5 rounded-2xl border border-[#DCE8EB] hover:border-[#080B10] transition-all">
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-[#111820]">
-                      <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-[#EDF5F7]/50 border border-[#DCE8EB] flex items-center justify-center">
+                      {m.image ? (
+                        <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="w-16 h-16 rounded-full bg-white border border-[#DCE8EB] flex items-center justify-center text-[#8CA2AD] shadow-sm">
+                          <User className="w-8 h-8 stroke-[1.5]" />
+                        </div>
+                      )}
                     </div>
-                    <h4 className="text-lg font-serif font-medium text-[#080B10]">{m.name}</h4>
-                    <p className="text-xs font-mono text-[#4A5568] uppercase mt-0.5">{m.role}</p>
+                    <h4 className="text-lg font-serif font-medium text-[#080B10] tracking-wide">{m.name}</h4>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* MEDIA */}
+            {/* DESIGN */}
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-3">
-                <h3 className="text-2xl font-serif font-light text-[#080B10]">MEDIA TEAM</h3>
-                <span className="text-xs font-mono text-[#FF2D5D] font-bold">2 MEMBERS</span>
+                <h3 className="text-2xl font-serif font-light text-[#080B10]">DESIGN TEAM</h3>
+                <span className="text-xs font-mono text-[#FF2D5D] font-bold">{communityTeams.design.length} MEMBERS</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {communityTeams.media.map((m) => (
+                {communityTeams.design.map((m) => (
                   <div key={m.id} className="group bg-[#F4FAFB] p-5 rounded-2xl border border-[#DCE8EB] hover:border-[#080B10] transition-all">
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-[#111820]">
-                      <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-[#EDF5F7]/50 border border-[#DCE8EB] flex items-center justify-center">
+                      {m.image ? (
+                        <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="w-16 h-16 rounded-full bg-white border border-[#DCE8EB] flex items-center justify-center text-[#8CA2AD] shadow-sm">
+                          <User className="w-8 h-8 stroke-[1.5]" />
+                        </div>
+                      )}
                     </div>
-                    <h4 className="text-lg font-serif font-medium text-[#080B10]">{m.name}</h4>
-                    <p className="text-xs font-mono text-[#4A5568] uppercase mt-0.5">{m.role}</p>
+                    <h4 className="text-lg font-serif font-medium text-[#080B10] tracking-wide">{m.name}</h4>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* VOLUNTEERS */}
+            {/* FIELD WORK */}
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-3">
-                <h3 className="text-2xl font-serif font-light text-[#080B10]">VOLUNTEERS TEAM</h3>
-                <span className="text-xs font-mono text-[#FF2D5D] font-bold">2 MEMBERS</span>
+                <h3 className="text-2xl font-serif font-light text-[#080B10]">FIELD WORK TEAM</h3>
+                <span className="text-xs font-mono text-[#FF2D5D] font-bold">{communityTeams.fieldWork.length} MEMBERS</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {communityTeams.volunteers.map((m) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {communityTeams.fieldWork.map((m) => (
                   <div key={m.id} className="group bg-[#F4FAFB] p-5 rounded-2xl border border-[#DCE8EB] hover:border-[#080B10] transition-all">
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-[#111820]">
-                      <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-[#EDF5F7]/50 border border-[#DCE8EB] flex items-center justify-center">
+                      {m.image ? (
+                        <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="w-16 h-16 rounded-full bg-white border border-[#DCE8EB] flex items-center justify-center text-[#8CA2AD] shadow-sm">
+                          <User className="w-8 h-8 stroke-[1.5]" />
+                        </div>
+                      )}
                     </div>
-                    <h4 className="text-lg font-serif font-medium text-[#080B10]">{m.name}</h4>
-                    <p className="text-xs font-mono text-[#4A5568] uppercase mt-0.5">{m.role}</p>
+                    <h4 className="text-lg font-serif font-medium text-[#080B10] tracking-wide">{m.name}</h4>
                   </div>
                 ))}
               </div>

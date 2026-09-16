@@ -17,30 +17,34 @@ export default function ProgramsPage() {
   const methodologySteps = [
     {
       step: "01",
-      name: "ARCHITECTURAL BLUEPRINTS",
-      title: "System Design & Threat Modeling",
-      desc: "Before writing a single line of code, teams map database schemas, API contracts, latency requirements, and failure modes with mentor input.",
+      name: "UNDERSTAND",
+      title: "Problem & Domain Discovery",
+      desc: "Participants begin by understanding the challenge, technology domain and expected outcome before deciding what to build.",
+      check: "Define the Problem",
       icon: Terminal
     },
     {
       step: "02",
-      name: "1-ON-1 SPRINT CHECKPOINTS",
-      title: "Direct Feedback from Tech Leads",
-      desc: "Regular 30-minute checkpoint sessions with Principal and Staff engineers to review Git branches, unblock edge cases, and tune performance.",
+      name: "BUILD",
+      title: "Hands-on Development",
+      desc: "Participants transform ideas into working prototypes through focused development, experimentation and collaboration.",
+      check: "Turn Ideas Into Solutions",
       icon: GitBranch
     },
     {
       step: "03",
-      name: "PRODUCTION STANDARDS",
-      title: "Zero-Toy Deployments",
-      desc: "Projects must have automated CI/CD pipelines, Row-Level Security, unit tests, and responsive mobile styling to qualify for final awards.",
+      name: "MENTOR & VALIDATE",
+      title: "Expert Feedback & Evaluation",
+      desc: "Mentors, jury members and industry professionals provide feedback on technical approach, practicality, innovation and presentation.",
+      check: "Improve Through Feedback",
       icon: Shield
     },
     {
       step: "04",
-      name: "LIVE DEMO & PEER SCRUTINY",
-      title: "Defend Before Engineering Jury",
-      desc: "Top squads demo live systems on stage, undergoing real-time chaos testing and technical Q&A with hiring CTOs and investors.",
+      name: "PRESENT & CONNECT",
+      title: "Demonstration & Opportunity",
+      desc: "Teams present their solutions, receive industry exposure and may unlock prizes, internships, technology credits, mentorship or other partner opportunities.",
+      check: "Build Beyond the Event",
       icon: Award
     }
   ];
@@ -55,14 +59,14 @@ export default function ProgramsPage() {
         <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#080B10] text-[#61C8D4] text-[11px] font-sans font-bold uppercase tracking-[0.25em] shadow-sm border border-[#263640]">
             <Sparkles className="w-3.5 h-3.5 text-[#61C8D4]" />
-            Curriculum & Initiatives
+            ✦ Programs & Initiatives
           </div>
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.08] text-[#080B10] font-serif">
-            Initiatives Designed to <br />
-            <span className="italic text-[#FF2D5D]">Make You Build.</span>
+            Programs Designed to <br />
+            <span className="italic text-[#FF2D5D]">Turn Learning Into Action.</span>
           </h1>
-          <p className="text-base sm:text-lg text-[#4A5568] leading-relaxed max-w-2xl mx-auto font-light font-sans">
-            From competitive 48-hour hackathon sprints to multi-week intensive cohort bootcamps, explore the practical tracks built for tomorrow's software engineers.
+          <p className="text-base sm:text-lg text-[#4A5568] leading-relaxed max-w-3xl mx-auto font-light font-sans">
+            From national-level hackathons and hands-on bootcamps to workshops, webinars and industry-led technical sessions, HackHere creates practical environments where students learn, build, collaborate and gain meaningful industry exposure.
           </p>
         </div>
       </section>
@@ -73,13 +77,13 @@ export default function ProgramsPage() {
       <section className="py-24 max-w-[1400px] w-full mx-auto px-6 sm:px-12 space-y-16">
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FF2D5D] font-bold">
-            EDUCATIONAL TRACKS
+            PROGRAM FORMATS
           </span>
           <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#080B10]">
-            Core Program Tracks
+            Explore Our Programs
           </h2>
           <p className="text-[#4A5568] text-base font-light">
-            Choose your learning velocity and participation format.
+            Different formats. One objective — practical learning through real technology, collaboration and industry exposure.
           </p>
         </div>
 
@@ -147,14 +151,14 @@ export default function ProgramsPage() {
                       to="/events"
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#080B10] text-[#61C8D4] border border-[#263640] hover:border-[#61C8D4] transition-all shadow-md"
                     >
-                      <span>View Sprints</span>
+                      <span>Explore Events</span>
                       <ArrowUpRight className="w-4 h-4 text-[#61C8D4]" />
                     </Link>
                     <Link
                       to="/get-started"
                       className="text-xs font-mono uppercase tracking-widest text-[#4A5568] hover:text-[#080B10] transition-colors font-bold"
                     >
-                      Apply Now →
+                      Get Started →
                     </Link>
                   </div>
                 </div>
@@ -166,19 +170,19 @@ export default function ProgramsPage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 3. CURRICULUM & MENTORSHIP METHODOLOGY                    */}
+      {/* 3. METHODOLOGY SECTION                                    */}
       {/* ========================================================= */}
       <section className="py-24 bg-white border-y border-[#DCE8EB] w-full">
         <div className="max-w-[1400px] w-full mx-auto px-6 sm:px-12 space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FF2D5D] font-bold">
-              ENGINEERING RIGOR
+              HOW WE WORK
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#080B10]">
-              Our Mentorship & Deployment Methodology
+              From Idea to Outcome
             </h2>
             <p className="text-[#4A5568] text-base font-light">
-              We enforce high production standards so your hackathon projects stand out to recruiters and venture scouts.
+              HackHere programs are structured to move participants beyond passive learning — from understanding a problem to building, validating and presenting a practical solution.
             </p>
           </div>
 
@@ -214,7 +218,7 @@ export default function ProgramsPage() {
 
                   <div className="pt-3 border-t border-[#DCE8EB] text-[11px] font-mono text-[#080B10] font-semibold flex items-center gap-1">
                     <Check className="w-3.5 h-3.5 text-[#FF2D5D]" />
-                    <span>Verified Production Gate</span>
+                    <span>✓ {step.check}</span>
                   </div>
                 </div>
               );
@@ -224,19 +228,19 @@ export default function ProgramsPage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 4. DIRECT ENROLMENT & PARTICIPATION CTA                   */}
+      {/* 4. DIRECT PARTICIPATION CTA                               */}
       {/* ========================================================= */}
       <CTABanner
         title={
           <>
-            Ready to step into <br />
-            <span className="italic text-[#61C8D4]">your first active cohort?</span>
+            Ready to participate in <br />
+            <span className="italic text-[#61C8D4]">our next initiative?</span>
           </>
         }
-        subtitle="Apply for upcoming hackathon tracks and intensive builder bootcamps."
-        ctaText="ENROL IN PROGRAM"
-        ctaLink="/get-started"
-        badge="✦ REGISTRATION OPEN FOR 2026 COHORTS"
+        subtitle="Explore upcoming hackathons, bootcamps, workshops and technical sessions."
+        ctaText="EXPLORE PROGRAMS"
+        ctaLink="/events"
+        badge="✦ EXPLORE UPCOMING PROGRAMS"
       />
 
     </div>

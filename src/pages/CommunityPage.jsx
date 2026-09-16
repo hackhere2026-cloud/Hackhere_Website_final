@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Sparkles, User } from "lucide-react";
 import { communityFounders, communityTeams } from "../data/hackhereData";
 
 // =========================================================================
@@ -73,7 +73,7 @@ function FounderCard({ founder, index, isAsymmetricSecondary = false }) {
 
 /**
  * Reusable Team Member Card Component
- * Strictly displays: PHOTO, NAME, ROLE, LINKEDIN
+ * Strictly displays: PHOTO / EMPTY PLACEHOLDER, and NAME ONLY
  */
 function TeamMemberCard({ member, index, isTech = false }) {
   return (
@@ -87,48 +87,38 @@ function TeamMemberCard({ member, index, isTech = false }) {
         delay: (index % 4) * 0.08,
         ease: [0.16, 1, 0.3, 1]
       }}
-      className="group flex flex-col justify-between font-sans"
+      className="group flex flex-col font-sans"
     >
-      {/* 1. PHOTO */}
-      <div className={`relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#111820] border ${
-        isTech ? "border-[#263640] shadow-md" : "border-[#DCE8EB]"
-      } group-hover:border-[#080B10] transition-all duration-500`}>
-        <img
-          src={member.image}
-          alt={`${member.name}, ${member.role}`}
-          loading="lazy"
-          className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-        />
+      {/* 1. PHOTO (EMPTY PLACEHOLDER CONTAINER) */}
+      <div className={`relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#F4FAFB] border-2 ${
+        isTech ? "border-[#DCE8EB] group-hover:border-[#61C8D4]" : "border-[#DCE8EB] group-hover:border-[#080B10]"
+      } transition-all duration-300 flex items-center justify-center shadow-sm`}>
+        {member.image ? (
+          <img
+            src={member.image}
+            alt={member.name}
+            loading="lazy"
+            className="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center text-[#8CA2AD] bg-[#EDF5F7]/50 group-hover:bg-[#EDF5F7] transition-colors">
+            <div className="w-16 h-16 rounded-full bg-white border border-[#DCE8EB] flex items-center justify-center shadow-sm">
+              <User className="w-8 h-8 text-[#8CA2AD] stroke-[1.5]" />
+            </div>
+          </div>
+        )}
         {isTech && (
-          <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-[#080B10]/80 backdrop-blur-md border border-[#263640] text-[9px] font-mono text-[#61C8D4]">
+          <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-[#080B10]/80 backdrop-blur-md border border-[#263640] text-[9px] font-mono text-[#61C8D4]">
             SYS::0{index + 1}
           </div>
         )}
       </div>
 
-      {/* 2. NAME, ROLE, LINKEDIN */}
-      <div className="pt-4 space-y-2">
-        <div>
-          <h4 className="text-lg sm:text-xl font-serif font-medium text-[#080B10] group-hover:text-[#FF2D5D] transition-colors duration-300">
-            {member.name}
-          </h4>
-          <p className="text-xs font-mono text-[#4A5568] uppercase tracking-wider font-normal mt-0.5">
-            {member.role}
-          </p>
-        </div>
-
-        <div>
-          <a
-            href={member.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${member.name} LinkedIn`}
-            className="inline-flex items-center gap-1 text-[11px] font-mono text-[#4A5568] hover:text-[#080B10] font-semibold transition-all duration-300 group/link"
-          >
-            <span>LinkedIn</span>
-            <ArrowUpRight className="w-3 h-3 transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 text-[#FF2D5D]" />
-          </a>
-        </div>
+      {/* 2. ONLY NAME */}
+      <div className="pt-3.5 text-center sm:text-left">
+        <h4 className="text-base sm:text-lg font-serif font-medium text-[#080B10] group-hover:text-[#FF2D5D] transition-colors duration-300 tracking-wide">
+          {member.name}
+        </h4>
       </div>
     </motion.div>
   );
@@ -140,7 +130,7 @@ function TeamMemberCard({ member, index, isTech = false }) {
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState("ALL");
 
-  const categories = ["ALL", "DESIGN", "TECH", "MEDIA", "VOLUNTEERS"];
+  const categories = ["ALL", "TECHNICAL", "DESIGN", "FIELD WORK"];
 
   const handleScrollToTeam = () => {
     const el = document.getElementById("meet-our-team");
@@ -305,7 +295,7 @@ export default function CommunityPage() {
           {/* ======================================================= */}
           <AnimatePresence mode="wait">
             
-            {/* TAB: ALL (Shows DESIGN + TECH + MEDIA + VOLUNTEERS, excludes founders) */}
+            {/* TAB: ALL (Shows TECHNICAL + DESIGN + FIELD WORK) */}
             {activeTab === "ALL" && (
               <motion.div
                 key="tab-all"
@@ -315,29 +305,12 @@ export default function CommunityPage() {
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-24"
               >
-                {/* A. DESIGN TEAM */}
-                <div className="space-y-8">
-                  <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-4">
-                    <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
-                      DESIGN
-                    </h3>
-                    <span className="text-xs font-mono text-[#FF2D5D] font-bold">
-                      {communityTeams.design.length} MEMBERS
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                    {communityTeams.design.map((m, idx) => (
-                      <TeamMemberCard key={m.id} member={m} index={idx} />
-                    ))}
-                  </div>
-                </div>
-
-                {/* B. TECH TEAM */}
+                {/* A. TECHNICAL TEAM */}
                 <div className="space-y-8">
                   <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-4">
                     <div className="flex items-center gap-3">
                       <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
-                        TECH
+                        TECHNICAL TEAM
                       </h3>
                       <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF2D5D] px-2.5 py-0.5 rounded bg-[#F4FAFB] border border-[#DCE8EB] font-bold">
                         THE BUILDERS
@@ -354,48 +327,74 @@ export default function CommunityPage() {
                   </div>
                 </div>
 
-                {/* C. MEDIA TEAM */}
+                {/* B. DESIGN TEAM */}
                 <div className="space-y-8">
                   <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-4">
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
-                        MEDIA
-                      </h3>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF2D5D] px-2.5 py-0.5 rounded bg-[#F4FAFB] border border-[#DCE8EB] font-bold">
-                        THE STORYTELLERS
-                      </span>
-                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
+                      DESIGN TEAM
+                    </h3>
                     <span className="text-xs font-mono text-[#FF2D5D] font-bold">
-                      {communityTeams.media.length} MEMBERS
+                      {communityTeams.design.length} MEMBERS
                     </span>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                    {communityTeams.media.map((m, idx) => (
+                    {communityTeams.design.map((m, idx) => (
                       <TeamMemberCard key={m.id} member={m} index={idx} />
                     ))}
                   </div>
                 </div>
 
-                {/* D. VOLUNTEERS */}
+                {/* C. FIELD WORK TEAM */}
                 <div className="space-y-8">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DCE8EB] pb-4">
-                    <div>
+                  <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-4">
+                    <div className="flex items-center gap-3">
                       <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
-                        VOLUNTEERS
+                        FIELD WORK TEAM
                       </h3>
-                      <p className="text-xs text-[#4A5568] font-sans mt-0.5">
-                        The people who step in, show up, and help make HackHere happen.
-                      </p>
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF2D5D] px-2.5 py-0.5 rounded bg-[#F4FAFB] border border-[#DCE8EB] font-bold">
+                        OPERATIONS & SPRINT ON-GROUND
+                      </span>
                     </div>
-                    <span className="text-xs font-mono text-[#FF2D5D] font-bold shrink-0">
-                      {communityTeams.volunteers.length} MEMBERS
+                    <span className="text-xs font-mono text-[#FF2D5D] font-bold">
+                      {communityTeams.fieldWork.length} MEMBERS
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-                    {communityTeams.volunteers.map((m, idx) => (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8">
+                    {communityTeams.fieldWork.map((m, idx) => (
                       <TeamMemberCard key={m.id} member={m} index={idx} />
                     ))}
                   </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* TAB: TECHNICAL */}
+            {activeTab === "TECHNICAL" && (
+              <motion.div
+                key="tab-technical"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-4">
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
+                      TECHNICAL TEAM
+                    </h3>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF2D5D] px-2.5 py-0.5 rounded bg-[#F4FAFB] border border-[#DCE8EB] font-bold">
+                      THE BUILDERS
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono text-[#FF2D5D] font-bold">
+                    {communityTeams.tech.length} MEMBERS
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                  {communityTeams.tech.map((m, idx) => (
+                    <TeamMemberCard key={m.id} member={m} index={idx} isTech={true} />
+                  ))}
                 </div>
               </motion.div>
             )}
@@ -426,10 +425,10 @@ export default function CommunityPage() {
               </motion.div>
             )}
 
-            {/* TAB: TECH */}
-            {activeTab === "TECH" && (
+            {/* TAB: FIELD WORK */}
+            {activeTab === "FIELD WORK" && (
               <motion.div
-                key="tab-tech"
+                key="tab-fieldwork"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -439,80 +438,18 @@ export default function CommunityPage() {
                 <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-4">
                   <div className="flex items-center gap-3">
                     <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
-                      TECH TEAM
+                      FIELD WORK TEAM
                     </h3>
                     <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF2D5D] px-2.5 py-0.5 rounded bg-[#F4FAFB] border border-[#DCE8EB] font-bold">
-                      THE BUILDERS
+                      OPERATIONS & SPRINT ON-GROUND
                     </span>
                   </div>
                   <span className="text-xs font-mono text-[#FF2D5D] font-bold">
-                    {communityTeams.tech.length} MEMBERS
+                    {communityTeams.fieldWork.length} MEMBERS
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                  {communityTeams.tech.map((m, idx) => (
-                    <TeamMemberCard key={m.id} member={m} index={idx} isTech={true} />
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
-            {/* TAB: MEDIA */}
-            {activeTab === "MEDIA" && (
-              <motion.div
-                key="tab-media"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8"
-              >
-                <div className="flex items-center justify-between border-b border-[#DCE8EB] pb-4">
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
-                      MEDIA TEAM
-                    </h3>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF2D5D] px-2.5 py-0.5 rounded bg-[#F4FAFB] border border-[#DCE8EB] font-bold">
-                      THE STORYTELLERS
-                    </span>
-                  </div>
-                  <span className="text-xs font-mono text-[#FF2D5D] font-bold">
-                    {communityTeams.media.length} MEMBERS
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                  {communityTeams.media.map((m, idx) => (
-                    <TeamMemberCard key={m.id} member={m} index={idx} />
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
-            {/* TAB: VOLUNTEERS */}
-            {activeTab === "VOLUNTEERS" && (
-              <motion.div
-                key="tab-volunteers"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DCE8EB] pb-4">
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-serif font-light text-[#080B10] uppercase tracking-wider">
-                      VOLUNTEERS
-                    </h3>
-                    <p className="text-xs text-[#4A5568] font-sans mt-0.5">
-                      The people who step in, show up, and help make HackHere happen.
-                    </p>
-                  </div>
-                  <span className="text-xs font-mono text-[#FF2D5D] font-bold shrink-0">
-                    {communityTeams.volunteers.length} MEMBERS
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-                  {communityTeams.volunteers.map((m, idx) => (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8">
+                  {communityTeams.fieldWork.map((m, idx) => (
                     <TeamMemberCard key={m.id} member={m} index={idx} />
                   ))}
                 </div>

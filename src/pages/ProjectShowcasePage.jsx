@@ -2,14 +2,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Github, ExternalLink, Filter, Search, Award, Sparkles, Code2, ArrowUpRight, ArrowRight } from "lucide-react";
-import { projectsData } from "../data/hackhereData";
+import { projectsData, projectCategories } from "../data/hackhereData";
 import CTABanner from "../components/CTABanner";
 
 export default function ProjectShowcasePage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", "AI & Healthcare", "Distributed Systems", "Developer Tools"];
+  const categories = projectCategories || ["All", "AI & EdTech", "Developer Tools", "Distributed Systems", "AI & Healthcare"];
 
   const filtered = projectsData.filter((p) => {
     const matchSearch =
@@ -96,11 +96,17 @@ export default function ProjectShowcasePage() {
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF2D5D] px-3.5 py-1 rounded-full bg-[#F4FAFB] border border-[#DCE8EB] font-bold">
-                    {proj.event}
+                  <span
+                    className={`text-[11px] font-mono uppercase tracking-widest px-3.5 py-1 rounded-full font-bold border transition-colors ${
+                      proj.isProduct || proj.badge?.includes("PRODUCT")
+                        ? "bg-[#080B10] text-[#61C8D4] border-[#263640]"
+                        : "text-[#FF2D5D] bg-[#F4FAFB] border-[#DCE8EB]"
+                    }`}
+                  >
+                    {proj.badge || proj.event}
                   </span>
-                  <span className="text-xs font-mono text-[#FF2D5D] font-bold">
-                    Verified Awardee
+                  <span className="text-xs font-mono text-[#FF2D5D] font-bold uppercase tracking-wider">
+                    {proj.topRightBadge || proj.status || "Verified Awardee"}
                   </span>
                 </div>
 
@@ -122,10 +128,10 @@ export default function ProjectShowcasePage() {
                   </p>
                 </div>
 
-                {/* Key Impact Point */}
-                {proj.impact && proj.impact.length > 0 && (
-                  <div className="bg-[#F4FAFB] p-3.5 rounded-xl border border-[#DCE8EB] text-xs font-mono text-[#FF2D5D] font-semibold">
-                    ✦ {proj.impact[0]}
+                {/* Key Impact / Highlight Box */}
+                {(proj.highlightBox || (proj.impact && proj.impact.length > 0)) && (
+                  <div className="bg-[#F4FAFB] p-3.5 rounded-xl border border-[#DCE8EB] text-xs font-mono text-[#FF2D5D] font-semibold leading-relaxed">
+                    {proj.highlightBox || `✦ ${proj.impact[0]}`}
                   </div>
                 )}
               </div>

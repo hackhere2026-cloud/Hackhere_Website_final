@@ -19,14 +19,13 @@ export default function EventsPage() {
     "Hackathon",
     "Bootcamp",
     "Tech Talk",
-    "Coding Events",
     "Webinar",
     "Tech Workshops"
   ];
 
   const completedHackathons = eventsData.filter((e) => e.category === "completed");
   const upcomingHackathons = eventsData.filter((e) => e.category === "upcoming-hackathon");
-  const upcomingBootcamps = eventsData.filter((e) => e.category === "upcoming-bootcamp");
+  const bootcampsList = eventsData.filter((e) => e.type === "Bootcamp" || e.category?.includes("bootcamp"));
 
   // Filtered lists if search query or program filter is entered
   const filterList = (list) => {
@@ -51,7 +50,7 @@ export default function EventsPage() {
 
   const filteredUpcoming = filterList(upcomingHackathons);
   const filteredCompleted = filterList(completedHackathons);
-  const filteredBootcamps = filterList(upcomingBootcamps);
+  const filteredBootcamps = filterList(bootcampsList);
 
   return (
     <div className="min-h-screen bg-[#F4FAFB] text-[#080B10] pt-8 sm:pt-12 pb-20 selection:bg-[#080B10] selection:text-[#61C8D4]">
@@ -105,7 +104,7 @@ export default function EventsPage() {
       </section>
 
       {/* ========================================================= */}
-      {/* SECTION B: UPCOMING HACKATHONS (NEXORA & HACK TO HIRE)     */}
+      {/* SECTION B: UPCOMING HACKATHONS                             */}
       {/* ========================================================= */}
       <section className="py-20 px-6 sm:px-12 max-w-[1400px] w-full mx-auto space-y-12">
         <div className="flex flex-col md:flex-row justify-between md:items-end gap-4">
@@ -121,7 +120,7 @@ export default function EventsPage() {
             </h2>
           </div>
           <p className="text-xs font-mono text-[#4A5568]">
-            REGISTRATION OPEN • NEXORA & HACK TO HIRE
+            REGISTRATION OPEN • UPCOMING FLAGSHIPS & SPRINT CHALLENGES
           </p>
         </div>
 
@@ -184,7 +183,7 @@ export default function EventsPage() {
                   to={`/events/${event.id}`}
                   className="text-xs font-mono text-[#8CA2AD] hover:text-white transition-colors underline underline-offset-4 font-bold"
                 >
-                  View Challenge Tracks & Rules →
+                  View Challenge Domains & Rules →
                 </Link>
               </div>
             </div>
@@ -266,7 +265,7 @@ export default function EventsPage() {
       </section>
 
       {/* ========================================================= */}
-      {/* SECTION C: UPCOMING BOOTCAMPS                             */}
+      {/* SECTION C: TECHNICAL BOOTCAMPS & ACADEMIES                */}
       {/* ========================================================= */}
       <section className="py-24 px-6 sm:px-12 max-w-[1400px] w-full mx-auto space-y-12">
         <div className="flex flex-col md:flex-row justify-between md:items-end gap-4">
@@ -275,15 +274,15 @@ export default function EventsPage() {
               SECTION C / COHORT LEARNING
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#080B10] mt-2">
-              Upcoming Intensive Bootcamps
+              Technical Bootcamps & Academies
             </h2>
           </div>
           <p className="text-xs font-mono text-[#4A5568]">
-            MULTI-WEEK COHORTS • CAPSTONE PROJECTS • CODE REVIEWS
+            STRUCTURED COHORTS • BLOCKCHAIN & AI CREDENTIALS • CODE REVIEWS
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className={`grid grid-cols-1 ${filteredBootcamps.length > 1 ? "lg:grid-cols-2" : "max-w-3xl"} gap-8`}>
           {filteredBootcamps.map((bootcamp) => (
             <div
               key={bootcamp.id}
@@ -315,7 +314,7 @@ export default function EventsPage() {
                 {/* Curriculum Tracks */}
                 <div className="space-y-2 pt-2 font-sans">
                   <span className="text-xs font-mono uppercase tracking-wider text-[#FF2D5D] font-bold block">
-                    Curriculum Modules:
+                    Curriculum Domains:
                   </span>
                   <div className="space-y-1.5">
                     {bootcamp.tracks.slice(0, 3).map((t, tIdx) => (
@@ -333,15 +332,21 @@ export default function EventsPage() {
                   to={`/events/${bootcamp.id}`}
                   className="bg-[#080B10] text-[#61C8D4] border border-[#263640] hover:border-[#61C8D4] px-6 py-3 rounded-full font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-md"
                 >
-                  <span>VIEW CURRICULUM</span>
+                  <span>{bootcamp.status === "Completed" ? "VIEW RECAP & CURRICULUM" : "VIEW CURRICULUM"}</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
-                <Link
-                  to="/get-started"
-                  className="text-xs font-mono text-[#FF2D5D] font-bold hover:underline"
-                >
-                  Enrol in Cohort →
-                </Link>
+                {bootcamp.status !== "Completed" ? (
+                  <Link
+                    to="/get-started"
+                    className="text-xs font-mono text-[#FF2D5D] font-bold hover:underline"
+                  >
+                    Enrol in Cohort →
+                  </Link>
+                ) : (
+                  <span className="text-xs font-mono text-[#4A5568] font-bold">
+                    Cohort Concluded ✦
+                  </span>
+                )}
               </div>
             </div>
           ))}

@@ -46,95 +46,81 @@ export default function VisionPage() {
     }
   ];
 
-  const communityHighlights = [
-    {
-      value: "500+",
-      label: "Community Members",
-      description: "Students, developers, creators & aspiring innovators growing together."
-    },
-    {
-      value: "10+",
-      label: "Events & Initiatives",
-      description: "Hackathons, workshops, sessions and community-led experiences."
-    },
-    {
-      value: "100+",
-      label: "Student Builders",
-      description: "Students who have participated, collaborated and built alongside the community."
-    },
-    {
-      value: "20+",
-      label: "Mentors & Industry Connects",
-      description: "Professionals, founders and experienced builders sharing knowledge and guidance."
-    }
-  ];
+  const communityHighlights = IMPACT_STATS;
 
   const partnersData = {
-    platinum: [
-      { name: "Elyon" },
-      { name: "Journi" },
-      { name: "MaestroMinds" },
-      { name: "Featherless AI" }
+    intern: [
+      { name: "Elyon", image: "/sponsors/elyon.jpeg" },
+      { name: "Journi", image: "/sponsors/jorni.jpeg" },
+      { name: "MaestroMinds", image: "/sponsors/maestrominds.png" },
+      { name: "Featherless AI", image: "/sponsors/69f88c4b96ddf527f9d69148_Copy of Red Yellow Retro Vibrant 2025 Monthly Calendar (1280 x 720 px) (1200 x 630 px) (18).png" }
     ],
-    gold: [
-      { name: "Medo" },
-      { name: "Cristel" },
-      { name: "Balveon Tech" },
-      { name: "Rezylens" }
+    credit: [
+      { name: "Medo", image: "/sponsors/WhatsApp Image 2026-07-28 at 9.42.44 PM (1).jpeg" },
+      { name: "Cristel", image: "/sponsors/WhatsApp Image 2026-07-28 at 9.42.44 PM.jpeg" },
+      { name: "Balveon Tech", image: "/sponsors/intern1.jpeg" },
+      { name: "Rezylens", image: "/sponsors/Frame 5 (2).png" }
     ],
-    silver: [
-      { name: "Elro Tech" },
-      { name: "Hashgrash Associations" },
-      { name: "UptoSkills" },
-      { name: "Honey Crib" }
+    goodies: [
+      { name: "Elro Tech", image: "/sponsors/WhatsApp Image 2026-07-28 at 6.46.09 PM.jpeg" },
+      { name: "Hashgraph Association", image: "/sponsors/WhatsApp Image 2026-07-28 at 9.42.43 PM.jpeg" },
+      { name: "UptoSkills", image: "/sponsors/UptoSkills.webp" },
+      { name: "Honeycrib", image: "/sponsors/intern 2.jpeg" }
     ],
     venue: [
-      { name: "SNS" },
-      { name: "Intro Works" }
+      { name: "SNS iHUB (Coimbatore)", image: "/sponsors/Quantexa poster (2).png" },
+      { name: "Intro Works", image: "/logo.jpg" }
     ]
   };
 
   const milestones = [
     {
       phase: "01",
-      title: "Founding the Builder Culture",
-      date: "August 2024",
-      desc: "Started as a passionate collective of students and mentors frustrated by the gap between theory and code. Hosted our first 24-hour campus hack sprint with 120 initial builders.",
+      title: "The Beginning of HackHere",
+      date: "March 2025",
+      desc: "HackHere began as a student-driven initiative focused on bridging the gap between academic learning and real-world technology. The vision was simple: create practical opportunities for students to learn, build, collaborate and gain meaningful industry exposure.",
       badge: "Inception"
     },
     {
       phase: "02",
-      title: "First Inter-College Hackathon",
-      date: "January 2025",
-      desc: "Expanded across 8 universities, launching weekly technical masterclasses in Web3, distributed databases, and modern frontend architecture.",
-      badge: "Expansion"
+      title: "Building the HackHere Ecosystem",
+      date: "April 2026",
+      desc: "HackHere evolved into a structured technology and innovation community, bringing together student developers, mentors, industry professionals and emerging technology partners around hands-on learning, hackathons and career opportunities.",
+      badge: "Foundation"
     },
     {
       phase: "03",
-      title: "AIVENTRA 2025 Flagship",
-      date: "October 2025",
-      desc: "Brought together 450+ developers and 95 squads in Bangalore to construct autonomous agentic workflows and LLM applications, awarding ₹2.5L+ in cash prizes.",
-      badge: "Major Milestone"
+      title: "AIVENTRA",
+      date: "May 2026",
+      desc: "HackHere launched AIVENTRA, its first national-level 24-hour hackathon in Chennai, bringing together 150+ onsite participants across Artificial Intelligence, Cybersecurity, Blockchain and DevOps. The event created tangible career outcomes, including internships and hiring opportunities through participating industry partners.",
+      badge: "First National Hackathon"
     },
     {
       phase: "04",
-      title: "VORTEXA 2025 Systems Sprint",
-      date: "December 2025",
-      desc: "600+ builders tackled high-throughput systems, edge computing, and real-time multiplayer protocols in Chennai with direct sponsorship from AWS & Redis.",
-      badge: "National Scale"
+      title: "VORTEXA",
+      date: "June 2026",
+      desc: "The second national-level HackHere hackathon, VORTEXA, attracted 470 registrations and introduced a hybrid competitive format with the Top 50 teams advancing to the offline 24-hour finale in Chennai. The event strengthened HackHere’s focus on functional prototypes, live demonstrations, GitHub-based development and industry-led evaluation.",
+      badge: "Expanding the Format"
     },
     {
       phase: "05",
-      title: "Community Expansion & Chapter Network",
-      date: "Early 2026",
-      desc: "Crossed 3,500+ active builders across 30+ university chapters, formalizing 1-on-1 sprint checkpoints and verifiable credential badging.",
-      badge: "3,500+ Builders"
+      title: "NEXORA",
+      date: "August 2026",
+      desc: "NEXORA marked HackHere’s largest event milestone at the time, recording 1,000+ registrations, 750+ participants and 200+ teams. Hosted at SNS iHUB, Coimbatore, the hackathon expanded HackHere’s industry network and resulted in nine teams receiving internship opportunities from partner companies.",
+      badge: "Scaling the Community"
     },
     {
       phase: "06",
-      title: "The Next Phase: Continuous Opportunity Engine",
+      title: "QUANTEXA & Ecosystem Expansion",
+      date: "September 2026",
+      desc: "HackHere continued its growth with QUANTEXA, a national-level 24-hour innovation hackathon focused on emerging domains including Quantum Technology, FinTech, Artificial Intelligence, Cybersecurity and Blockchain. Alongside hackathons, HackHere expanded into technical bootcamps, professional certifications, industry partnerships and technology platforms designed to support builders beyond individual events.",
+      badge: "National Platform"
+    },
+    {
+      phase: "07",
+      title: "From Events to a Continuous Opportunity Ecosystem",
       date: "2026 & Beyond",
-      desc: "Launching continuous startup incubation, open-source development grants, and direct-to-hire pipelines with top-tier technology startups.",
+      desc: "HackHere is evolving beyond individual hackathons into a continuous platform connecting learning, building, industry exposure and career opportunities. The next phase focuses on expanding national hackathons, specialized technology programs, industry-backed bootcamps, builder communities, internal technology products and direct pathways connecting promising talent with startups and enterprises.",
       badge: "Future Vision"
     }
   ];
@@ -309,7 +295,7 @@ export default function VisionPage() {
               Our Journey So Far
             </h2>
             <p className="text-[#4A5568] text-base font-light">
-              From our first classroom hack session to a national builder ecosystem.
+              From a student-led initiative to a growing national innovation and builder ecosystem.
             </p>
           </div>
 
@@ -360,55 +346,61 @@ export default function VisionPage() {
         </div>
 
         <div className="space-y-12">
-          {/* PLATINUM PARTNERS */}
+          {/* INTERN PARTNERS */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#61C8D4]" />
               <span className="text-xs font-mono uppercase tracking-widest text-[#080B10] font-bold">
-                PLATINUM PARTNERS
+                INTERN PARTNERS
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {partnersData.platinum.map((p, idx) => (
-                <div key={idx} className="bg-white border-2 border-[#DCE8EB] hover:border-[#080B10] rounded-2xl p-6 text-center space-y-1.5 shadow-sm transition-all group">
-                  <span className="text-[11px] font-mono text-[#A8862A] font-bold uppercase tracking-wider block">Platinum</span>
-                  <h4 className="text-xl font-serif font-medium text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</h4>
+              {partnersData.intern.map((p, idx) => (
+                <div key={idx} className="bg-white border-2 border-[#DCE8EB] hover:border-[#080B10] rounded-2xl p-5 text-center space-y-3 shadow-sm transition-all group flex flex-col items-center justify-between h-36">
+                  <div className="w-full h-20 flex items-center justify-center">
+                    <img src={p.image} alt={p.name} className="max-h-full max-w-full object-contain rounded-lg" />
+                  </div>
+                  <span className="text-xs font-serif font-bold text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* GOLD PARTNERS */}
+          {/* CREDIT PARTNERS */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]" />
               <span className="text-xs font-mono uppercase tracking-widest text-[#856404] font-bold">
-                GOLD PARTNERS
+                CREDIT PARTNERS
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {partnersData.gold.map((p, idx) => (
-                <div key={idx} className="bg-white border border-[#DCE8EB] hover:border-[#080B10] rounded-2xl p-5 text-center space-y-1.5 shadow-sm transition-all group">
-                  <span className="text-[11px] font-mono text-[#A8862A] font-bold uppercase tracking-wider block">Gold</span>
-                  <h4 className="text-lg font-serif font-medium text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</h4>
+              {partnersData.credit.map((p, idx) => (
+                <div key={idx} className="bg-white border border-[#DCE8EB] hover:border-[#080B10] rounded-2xl p-5 text-center space-y-3 shadow-sm transition-all group flex flex-col items-center justify-between h-36">
+                  <div className="w-full h-20 flex items-center justify-center">
+                    <img src={p.image} alt={p.name} className="max-h-full max-w-full object-contain rounded-lg" />
+                  </div>
+                  <span className="text-xs font-serif font-bold text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* SILVER PARTNERS */}
+          {/* GOODIES PARTNERS */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#A0AEC0]" />
               <span className="text-xs font-mono uppercase tracking-widest text-[#4A5568] font-bold">
-                SILVER PARTNERS
+                GOODIES PARTNERS
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {partnersData.silver.map((p, idx) => (
-                <div key={idx} className="bg-[#F4FAFB] border border-[#DCE8EB] hover:border-[#080B10] rounded-2xl p-5 text-center space-y-1.5 shadow-sm transition-all group">
-                  <span className="text-[11px] font-mono text-[#718096] font-bold uppercase tracking-wider block">Silver</span>
-                  <h4 className="text-base font-serif font-medium text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</h4>
+              {partnersData.goodies.map((p, idx) => (
+                <div key={idx} className="bg-[#F4FAFB] border border-[#DCE8EB] hover:border-[#080B10] rounded-2xl p-5 text-center space-y-3 shadow-sm transition-all group flex flex-col items-center justify-between h-36">
+                  <div className="w-full h-20 flex items-center justify-center">
+                    <img src={p.image} alt={p.name} className="max-h-full max-w-full object-contain rounded-lg" />
+                  </div>
+                  <span className="text-xs font-serif font-bold text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</span>
                 </div>
               ))}
             </div>
@@ -424,9 +416,11 @@ export default function VisionPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {partnersData.venue.map((p, idx) => (
-                <div key={idx} className="bg-white border-2 border-[#263640]/20 hover:border-[#080B10] rounded-2xl p-6 text-center space-y-1.5 shadow-sm transition-all group">
-                  <span className="text-xs font-mono text-[#FF2D5D] font-bold uppercase tracking-wider block">Venue Partner</span>
-                  <h4 className="text-xl font-serif font-medium text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</h4>
+                <div key={idx} className="bg-white border-2 border-[#263640]/20 hover:border-[#080B10] rounded-2xl p-5 text-center space-y-3 shadow-sm transition-all group flex flex-col items-center justify-between h-36">
+                  <div className="w-full h-20 flex items-center justify-center">
+                    <img src={p.image} alt={p.name} className="max-h-full max-w-full object-contain rounded-lg" />
+                  </div>
+                  <span className="text-xs font-serif font-bold text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">{p.name}</span>
                 </div>
               ))}
             </div>

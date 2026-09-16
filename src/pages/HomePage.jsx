@@ -1,7 +1,7 @@
 // src/pages/HomePage.jsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight, ArrowUpRight, Sparkles, Code2, Users,
   Trophy, Calendar, MapPin, CheckCircle2, ChevronRight,
@@ -27,6 +27,86 @@ const staggerContainer = {
     transition: { staggerChildren: 0.12, delayChildren: 0.1 }
   }
 };
+
+// Codrops 3D Rotating On-Scroll Sponsors Component
+function RotatingSponsorsSection() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Codrops 3D rotating scroll animations
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [30, 0, -25]);
+  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-12, 0, 12]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.9]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.4]);
+
+  const sponsors = [
+    { name: "Elyon", image: "/sponsors/elyon.jpeg", tier: "Title Partner" },
+    { name: "Journi", image: "/sponsors/jorni.jpeg", tier: "Gold Partner" },
+    { name: "Maestrominds", image: "/sponsors/maestrominds.png", tier: "Innovation Partner" },
+    { name: "Upto Skills", image: "/sponsors/UptoSkills.webp", tier: "Career Partner" },
+    { name: "Featherless AI", image: "/sponsors/69f88c4b96ddf527f9d69148_Copy of Red Yellow Retro Vibrant 2025 Monthly Calendar (1280 x 720 px) (1200 x 630 px) (18).png", tier: "AI Compute Partner" },
+    { name: "Rezylens", image: "/sponsors/Frame 5 (2).png", tier: "Ecosystem Partner" },
+    { name: "Elro Tech", image: "/sponsors/WhatsApp Image 2026-07-28 at 6.46.09 PM.jpeg", tier: "Tech Partner" },
+    { name: "Hashgraph Association", image: "/sponsors/WhatsApp Image 2026-07-28 at 9.42.43 PM.jpeg", tier: "Web3 Partner" },
+    { name: "Medo", image: "/sponsors/WhatsApp Image 2026-07-28 at 9.42.44 PM (1).jpeg", tier: "Health Tech Partner" },
+    { name: "Crystel", image: "/sponsors/WhatsApp Image 2026-07-28 at 9.42.44 PM.jpeg", tier: "Systems Partner" },
+    { name: "Quantexa", image: "/sponsors/Quantexa poster (2).png", tier: "Flagship Partner" },
+    { name: "Balveontech", image: "/sponsors/intern1.jpeg", tier: "Security Partner" },
+    { name: "Honeycrib", image: "/sponsors/intern 2.jpeg", tier: "Community Partner" }
+  ];
+
+  return (
+    <section ref={sectionRef} className="py-24 px-6 sm:px-12 max-w-[1400px] w-full mx-auto text-center space-y-12 overflow-hidden">
+      <div className="space-y-3">
+        <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FF2D5D] font-bold">
+          PARTNER & SPONSOR ECOSYSTEM
+        </span>
+        <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#080B10]">
+          Supported by Industry Leaders
+        </h2>
+        <p className="text-xs sm:text-sm font-mono text-[#4A5568] max-w-xl mx-auto uppercase tracking-wider">
+          Empowering student builders with tools, infrastructure, grants & hiring opportunities
+        </p>
+      </div>
+
+      <div className="[perspective:1200px] py-4">
+        <motion.div
+          style={{
+            rotateX,
+            rotateY,
+            scale,
+            opacity,
+            transformStyle: "preserve-3d"
+          }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 sm:gap-8 transition-transform duration-200 ease-out"
+        >
+          {sponsors.map((s, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{ scale: 1.08, rotateY: 12, rotateX: -8, z: 35 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="group relative rounded-3xl border-2 border-[#DCE8EB] bg-white p-4 shadow-md hover:shadow-2xl hover:border-[#080B10] transition-all duration-300 flex items-center justify-center h-32 sm:h-36 overflow-hidden"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#61C8D4]/10 via-transparent to-[#FF2D5D]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              
+              <div className="relative z-10 w-full h-full flex items-center justify-center p-2">
+                <img
+                  src={s.image}
+                  alt={s.name}
+                  className="max-h-full max-w-full object-contain rounded-xl transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 export default function HomePage() {
   const [activeKeyword, setActiveKeyword] = useState("BUILD");
@@ -85,15 +165,16 @@ export default function HomePage() {
             <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#FF2D5D]/20 bg-white/75 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#FF2D5D] shadow-sm backdrop-blur">
               <Sparkles className="h-4 w-4" /> India’s builder-first tech community
             </span>
-            <h1 className="font-serif text-[3.35rem] font-normal leading-[0.94] tracking-[-0.04em] text-[#080B10] sm:text-7xl lg:text-[5.15rem]">
-              Learn together.<br />
-              Build for real.<br />
-              <span className="relative inline-block italic text-[#FF2D5D]">
-                Grow without limits.
-                <span className="absolute -bottom-2 left-[8%] h-[3px] w-[84%] rounded-full bg-gradient-to-r from-transparent via-[#61C8D4] to-transparent" />
+            <h1 className="font-serif text-5xl font-normal leading-[0.9] tracking-[-0.04em] text-[#080B10] sm:text-8xl lg:text-[7.25rem]">
+              <span className="relative inline-block">
+                Hack<span className="italic text-[#FF2D5D]">Here</span>
+                <span className="absolute -bottom-3 left-[6%] h-[4px] w-[88%] rounded-full bg-gradient-to-r from-transparent via-[#61C8D4] to-transparent" />
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-[#526873] sm:text-lg">
+            <p className="mt-5 font-serif text-xl sm:text-2xl font-light text-[#080B10] tracking-tight">
+              Learn together. Build for real. <span className="italic text-[#FF2D5D]">Grow without limits.</span>
+            </p>
+            <p className="mt-3 max-w-xl text-base leading-7 text-[#526873] sm:text-lg">
               HackHere brings ambitious students, developers, and mentors together through practical programs, live hackathons, and opportunities that move careers forward.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -137,9 +218,9 @@ export default function HomePage() {
           <div className="pointer-events-none absolute right-[205px] top-[245px] hidden h-16 w-16 rounded-bl-[32px] border-b-2 border-l-2 border-[#61C8D4] lg:block" />
 
           <motion.div variants={fadeInUp} className="mx-auto mt-16 grid max-w-2xl grid-cols-3 divide-x divide-[#D4E4E8] rounded-2xl border border-white bg-white/80 px-3 py-4 text-center shadow-[0_20px_60px_rgba(8,11,16,0.10)] ring-1 ring-[#DCE8EB] backdrop-blur-xl lg:absolute lg:bottom-7 lg:left-1/2 lg:mt-0 lg:w-[620px] lg:-translate-x-1/2">
-            <div className="px-3"><Users className="mx-auto mb-1 h-4 w-4 text-[#FF2D5D]" /><strong className="block font-serif text-2xl text-[#080B10]">3.5K+</strong><span className="text-[10px] font-bold uppercase tracking-wider text-[#667B85]">Builders</span></div>
-            <div className="px-3"><Code2 className="mx-auto mb-1 h-4 w-4 text-[#61C8D4]" /><strong className="block font-serif text-2xl text-[#080B10]">25+</strong><span className="text-[10px] font-bold uppercase tracking-wider text-[#667B85]">Live programs</span></div>
-            <div className="px-3"><Trophy className="mx-auto mb-1 h-4 w-4 text-[#FF2D5D]" /><strong className="block font-serif text-2xl text-[#080B10]">₹12.5L+</strong><span className="text-[10px] font-bold uppercase tracking-wider text-[#667B85]">Prize ecosystem</span></div>
+            <div className="px-3"><Users className="mx-auto mb-1 h-4 w-4 text-[#FF2D5D]" /><strong className="block font-serif text-2xl text-[#080B10]">1000+</strong><span className="text-[10px] font-bold uppercase tracking-wider text-[#667B85]">Builders</span></div>
+            <div className="px-3"><Code2 className="mx-auto mb-1 h-4 w-4 text-[#61C8D4]" /><strong className="block font-serif text-2xl text-[#080B10]">3+</strong><span className="text-[10px] font-bold uppercase tracking-wider text-[#667B85]">Live events</span></div>
+            <div className="px-3"><Trophy className="mx-auto mb-1 h-4 w-4 text-[#FF2D5D]" /><strong className="block font-serif text-2xl text-[#080B10]">₹1.80L+</strong><span className="text-[10px] font-bold uppercase tracking-wider text-[#667B85]">Prize ecosystem</span></div>
           </motion.div>
         </motion.div>
       </section>
@@ -340,7 +421,7 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row justify-between md:items-end gap-6">
           <div>
             <span className="text-xs uppercase tracking-[0.25em] text-[#FF2D5D] font-bold font-mono">
-              INITIATIVES & TRACKS
+              INITIATIVES & DOMAINS
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#080B10] mt-2">
               Programs Snapshot.
@@ -350,7 +431,7 @@ export default function HomePage() {
             to="/program"
             className="text-xs uppercase tracking-widest text-[#FF2D5D] font-bold hover:underline flex items-center gap-1.5 font-mono"
           >
-            Explore Full Curriculum <ArrowRight className="w-4 h-4" />
+            Explore Programs <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -418,11 +499,15 @@ export default function HomePage() {
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF2D5D] px-3 py-1 rounded-full bg-white border border-[#DCE8EB] font-bold">
-                      {project.event}
+                    <span className={`text-[11px] font-mono uppercase tracking-widest px-3 py-1 rounded-full font-bold border transition-colors ${
+                      project.isProduct || project.badge?.includes("PRODUCT")
+                        ? "bg-[#080B10] text-[#61C8D4] border-[#263640]"
+                        : "text-[#FF2D5D] bg-white border-[#DCE8EB]"
+                    }`}>
+                      {project.badge || project.event}
                     </span>
-                    <span className="text-xs font-mono text-[#FF2D5D] font-bold">
-                      Verified Prototype
+                    <span className="text-xs font-mono text-[#FF2D5D] font-bold uppercase tracking-wider">
+                      {project.topRightBadge || project.status || "Verified Prototype"}
                     </span>
                   </div>
 
@@ -438,6 +523,13 @@ export default function HomePage() {
                     <p><strong className="font-bold text-[#080B10]">Problem:</strong> {project.problem}</p>
                     <p><strong className="font-bold text-[#080B10]">Solution:</strong> {project.solution}</p>
                   </div>
+
+                  {/* Highlight Box */}
+                  {(project.highlightBox || (project.impact && project.impact.length > 0)) && (
+                    <div className="bg-white p-3 rounded-xl border border-[#DCE8EB] text-xs font-mono text-[#FF2D5D] font-semibold leading-relaxed">
+                      {project.highlightBox || `✦ ${project.impact[0]}`}
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-4 pt-6 border-t border-[#DCE8EB]">
@@ -494,27 +586,9 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 7. SPONSORS & COLLABORATORS STRIP (RESTRAINED LOGO TICKER)*/}
+      {/* 7. CODROPS 3D ROTATING ON-SCROLL SPONSOR GALLERY           */}
       {/* ========================================================= */}
-      <section className="py-20 px-6 sm:px-12 max-w-[1400px] w-full mx-auto text-center space-y-8">
-        <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#4A5568] font-bold">
-          SUPPORTED BY INDUSTRY LEADERS & PARTNER INSTITUTIONS
-        </span>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[
-            "Elyon", "Journi", "Maestrominds", "Featherless AI", "Rezylens", "Elro Tech",
-            "Hashgraph Association", "Upto Skills", "Medo", "Crystel", "Balveontech", "Honeycrib"
-          ].map((partner, idx) => (
-            <div
-              key={idx}
-              className="p-5 rounded-2xl bg-white border border-[#DCE8EB] flex items-center justify-center font-serif text-sm font-semibold text-[#080B10] shadow-sm hover:border-[#080B10] transition-colors"
-            >
-              {partner}
-            </div>
-          ))}
-        </div>
-      </section>
+      <RotatingSponsorsSection />
 
       {/* ========================================================= */}
       {/* 8. FINAL CTA                                              */}

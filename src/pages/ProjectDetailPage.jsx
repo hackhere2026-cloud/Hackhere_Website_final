@@ -38,10 +38,10 @@ export default function ProjectDetailPage() {
               <div className="flex flex-wrap items-center gap-3">
                 <span className="text-xs font-mono uppercase tracking-widest px-3.5 py-1 rounded-full bg-[#080B10] text-[#61C8D4] border border-[#263640] font-bold inline-flex items-center gap-1.5">
                   <Sparkles className="w-3 h-3 text-[#61C8D4]" />
-                  {project.event}
+                  {project.badge || project.event}
                 </span>
-                <span className="text-xs font-mono text-[#FF2D5D] font-bold bg-white px-3 py-1 rounded-full border border-[#DCE8EB]">
-                  Verified Production Outcome
+                <span className="text-xs font-mono text-[#FF2D5D] font-bold bg-white px-3 py-1 rounded-full border border-[#DCE8EB] uppercase tracking-wider">
+                  {project.topRightBadge || "Verified Production Outcome"}
                 </span>
               </div>
 
@@ -122,6 +122,146 @@ export default function ProjectDetailPage() {
       </section>
 
       {/* ========================================================= */}
+      {/* 2.5 EXPANDED CASE STUDY SECTIONS (EVALEDGE ARCHITECTURE)  */}
+      {/* ========================================================= */}
+      {project.caseStudy && (
+        <section className="py-20 bg-white border-y border-[#DCE8EB] w-full font-sans">
+          <div className="max-w-[1400px] w-full mx-auto px-6 sm:px-12 space-y-12">
+            <div className="max-w-3xl space-y-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#080B10] text-[#61C8D4] text-[11px] font-mono font-bold uppercase tracking-widest border border-[#263640]">
+                <Sparkles className="w-3 h-3 text-[#61C8D4]" />
+                System Deep-Dive
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#080B10]">
+                Platform Architecture & Integrity Engine
+              </h2>
+              <p className="text-sm sm:text-base text-[#4A5568] font-light leading-relaxed">
+                A unified examination workflow engineered with multi-modal behavioral sensors, automated evaluation rubrics, and tamper-resistant audit trails.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* 1. What EvalEdge Does */}
+              <div className="bg-[#F4FAFB] border-2 border-[#DCE8EB] hover:border-[#080B10] rounded-[2rem] p-8 sm:p-10 space-y-5 transition-all duration-300 group shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#080B10] text-[#61C8D4] flex items-center justify-center border border-[#263640]">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF2D5D]">
+                    EXAMINATION WORKFLOW
+                  </span>
+                  <h3 className="text-2xl font-serif font-light text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">
+                    What {project.name} Does
+                  </h3>
+                </div>
+                <p className="text-sm text-[#4A5568] leading-relaxed font-light">
+                  {project.caseStudy.whatItDoes}
+                </p>
+                <div className="pt-4 border-t border-[#DCE8EB] flex flex-wrap gap-1.5">
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Exam Creation Studio
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Hardware Pre-flight
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Controlled Fullscreen
+                  </span>
+                </div>
+              </div>
+
+              {/* 2. Integrity Engine */}
+              <div className="bg-[#F4FAFB] border-2 border-[#DCE8EB] hover:border-[#080B10] rounded-[2rem] p-8 sm:p-10 space-y-5 transition-all duration-300 group shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#080B10] text-[#FF2D5D] flex items-center justify-center border border-[#263640]">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF2D5D]">
+                    MULTI-MODAL BEHAVIORAL SENSORS
+                  </span>
+                  <h3 className="text-2xl font-serif font-light text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">
+                    Integrity Engine
+                  </h3>
+                </div>
+                <p className="text-sm text-[#4A5568] leading-relaxed font-light">
+                  {project.caseStudy.integrityEngine}
+                </p>
+                <div className="pt-4 border-t border-[#DCE8EB] flex flex-wrap gap-1.5">
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Tab-Switch Sensor
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Gaze & Eye Tracker
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Audio Anomaly Engine
+                  </span>
+                </div>
+              </div>
+
+              {/* 3. Intelligent Evaluation */}
+              <div className="bg-[#F4FAFB] border-2 border-[#DCE8EB] hover:border-[#080B10] rounded-[2rem] p-8 sm:p-10 space-y-5 transition-all duration-300 group shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#080B10] text-[#61C8D4] flex items-center justify-center border border-[#263640]">
+                  <Code2 className="w-6 h-6" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF2D5D]">
+                    AI & HYBRID SCORING
+                  </span>
+                  <h3 className="text-2xl font-serif font-light text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">
+                    Intelligent Evaluation
+                  </h3>
+                </div>
+                <p className="text-sm text-[#4A5568] leading-relaxed font-light">
+                  {project.caseStudy.intelligentEvaluation}
+                </p>
+                <div className="pt-4 border-t border-[#DCE8EB] flex flex-wrap gap-1.5">
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Instant Objective Grading
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    AI Descriptive Rubrics
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Faculty Review Pipeline
+                  </span>
+                </div>
+              </div>
+
+              {/* 4. Integrity Receipt */}
+              <div className="bg-[#F4FAFB] border-2 border-[#DCE8EB] hover:border-[#080B10] rounded-[2rem] p-8 sm:p-10 space-y-5 transition-all duration-300 group shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#080B10] text-[#FF7B7B] flex items-center justify-center border border-[#263640]">
+                  <Trophy className="w-6 h-6" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF2D5D]">
+                    VERIFIABLE AUDIT RECORD
+                  </span>
+                  <h3 className="text-2xl font-serif font-light text-[#080B10] group-hover:text-[#FF2D5D] transition-colors">
+                    Integrity Receipt
+                  </h3>
+                </div>
+                <p className="text-sm text-[#4A5568] leading-relaxed font-light">
+                  {project.caseStudy.integrityReceipt}
+                </p>
+                <div className="pt-4 border-t border-[#DCE8EB] flex flex-wrap gap-1.5">
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Cryptographic Proof
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Candidate Timeline Log
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white text-[#080B10] border border-[#DCE8EB]">
+                    Audit-Ready Export
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ========================================================= */}
       {/* 3. MEASURABLE IMPACT                                      */}
       {/* ========================================================= */}
       <section className="py-20 bg-white border-y border-[#DCE8EB] w-full">
@@ -175,7 +315,7 @@ export default function ProjectDetailPage() {
               ))}
             </div>
 
-            {relatedEvent && (
+            {relatedEvent ? (
               <div className="pt-6 border-t border-[#DCE8EB] space-y-2">
                 <span className="text-xs font-mono text-[#4A5568] block">Origin Event:</span>
                 <Link
@@ -185,6 +325,14 @@ export default function ProjectDetailPage() {
                   <span>{relatedEvent.title}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
+              </div>
+            ) : (
+              <div className="pt-6 border-t border-[#DCE8EB] space-y-2">
+                <span className="text-xs font-mono text-[#4A5568] block">Classification:</span>
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#080B10]">
+                  <span className="w-2 h-2 rounded-full bg-[#61C8D4] animate-pulse inline-block" />
+                  <span>HACKHERE NATIVE PRODUCT 2026</span>
+                </div>
               </div>
             )}
           </div>

@@ -42,13 +42,25 @@ export default function CTABanner({ title, subtitle, ctaText = "Start Applicatio
         </div>
 
         <div className="relative z-10 shrink-0">
-          <Link
-            to={ctaLink}
-            className="bg-[#61C8D4] text-[#080B10] hover:bg-white font-sans font-bold px-8 py-4 rounded-full flex items-center gap-2 text-xs uppercase tracking-widest transition-all duration-300 shadow-xl group"
-          >
-            <span>{ctaText}</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
+          {ctaLink.startsWith("http") ? (
+            <a
+              href={ctaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#61C8D4] text-[#080B10] hover:bg-white font-sans font-bold px-8 py-4 rounded-full flex items-center gap-2 text-xs uppercase tracking-widest transition-all duration-300 shadow-xl group"
+            >
+              <span>{ctaText}</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          ) : (
+            <Link
+              to={ctaLink}
+              className="bg-[#61C8D4] text-[#080B10] hover:bg-white font-sans font-bold px-8 py-4 rounded-full flex items-center gap-2 text-xs uppercase tracking-widest transition-all duration-300 shadow-xl group"
+            >
+              <span>{ctaText}</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+          )}
         </div>
       </motion.div>
     </section>

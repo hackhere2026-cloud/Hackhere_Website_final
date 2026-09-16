@@ -75,14 +75,11 @@ export default function HackHereNav() {
     }`}>
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 py-4 flex items-center justify-between">
         
-        {/* BRAND LOGO WITH ATTACHED LOGO IMAGE */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-[#080B10] overflow-hidden flex items-center justify-center border border-[#263640] shadow-sm group-hover:border-[#61C8D4] transition-colors p-0.5">
-            <img src="/logo.jpg" alt="HackHere Logo" className="w-full h-full object-contain rounded-lg" />
+        {/* BRAND LOGO */}
+        <Link to="/" className="flex items-center group">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#080B10] overflow-hidden flex items-center justify-center border-2 border-[#263640] shadow-md group-hover:border-[#FF2D5D] transition-all duration-300 p-1">
+            <img src="/logo.jpg" alt="HackHere Logo" className="w-full h-full object-cover rounded-xl" />
           </div>
-          <span className="font-serif text-2xl font-bold tracking-tight text-[#080B10]">
-            Hack<span className="italic text-[#FF2D5D]">Here</span>
-          </span>
         </Link>
 
         {/* CENTER NAVIGATION LINKS (EXACT SEQUENCE) */}
