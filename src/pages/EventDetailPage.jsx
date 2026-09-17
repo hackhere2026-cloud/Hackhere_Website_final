@@ -420,13 +420,26 @@ export default function EventDetailPage() {
                     />
                   )}
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-1.5 w-full">
+                  {guest.badge && (
+                    <span className="inline-block mb-1 text-[10px] font-mono text-[#61C8D4] bg-[#080B10] px-3 py-0.5 rounded-full border border-[#263640] uppercase tracking-wider font-bold">
+                      {guest.badge}
+                    </span>
+                  )}
                   <h4 className="text-xl font-serif font-medium text-[#080B10] flex items-center justify-center gap-1.5">
                     {guest.name}
                     {guest.isLocked && <Lock className="w-3.5 h-3.5 text-[#FF2D5D]" />}
                   </h4>
+                  {guest.degrees && (
+                    <p className="text-[11px] font-mono text-[#4A5568]">{guest.degrees}</p>
+                  )}
                   <p className="text-xs font-mono text-[#FF2D5D] font-bold">{guest.title}</p>
                   <p className="text-xs text-[#4A5568]">{guest.company}</p>
+                  {guest.bio && (
+                    <p className="text-xs text-[#4A5568] pt-2 font-light leading-relaxed font-sans line-clamp-3 text-center">
+                      {guest.bio}
+                    </p>
+                  )}
                   {guest.isLocked && (
                     <span className="inline-block mt-2 text-[10px] font-mono text-[#8CA2AD] uppercase tracking-wider bg-[#F4FAFB] px-2.5 py-1 rounded-full border border-[#DCE8EB]">
                       Revealing Soon

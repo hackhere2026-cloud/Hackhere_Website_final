@@ -368,9 +368,31 @@ export const eventsData = [
       { time: "Sept 20 - 04:00 PM", title: "Awards Ceremony & Internship Distribution", desc: "Announcement of winners, ₹30,000 prize distribution, Hedera Web3 certifications, and partner internship handovers." }
     ],
     chiefGuests: [
-      { name: "Reinard Abhishek J", title: "HR", company: "ELRO Tech", image: "/juries/jury_3.jpeg" },
-      { name: "Antony", title: "Software Engineer", company: "Chris Byte Solutions (Former Intern at Prism Software Solutions)", image: "/images/antony.jpeg" },
-      { name: "Yuva Sri", title: "Software Developer", company: "PwC (Former Intern at Zoho)", image: "/images/yuvasri.jpeg" }
+      {
+        name: "Dr. M. Saravanakumar",
+        degrees: "MBA., Ms(IT)., M.Phil., Ph.D.",
+        title: "Dean",
+        company: "Anna University Regional Campus Coimbatore",
+        badge: "Chief Jury & Evaluator",
+        image: "/juries/dr_m_saravanakumar.png",
+        bio: "Dean at Anna University Regional Campus Coimbatore, driving academic leadership, technological innovation, and empowering the next generation of engineers."
+      },
+      {
+        name: "Reinard Abhishek J",
+        title: "HR",
+        company: "ELRO Tech",
+        badge: "Official Jury",
+        image: "/juries/jury_3.jpeg",
+        bio: "HR at ELRO Tech, empowering talent acquisition, organizational growth, and human resources strategy."
+      },
+      {
+        name: "Dr. A. Kumar",
+        title: "Dean – Projects & Student Affairs / Head of AI & DS",
+        company: "RVS College of Engineering and Technology",
+        badge: "Chief Guest",
+        image: "/juries/dr_a_kumar.jpeg",
+        bio: "Dean – Projects & Student Affairs and Head of AI & DS at RVS College of Engineering and Technology, fostering academic innovation and advanced AI research."
+      }
     ],
     organizers: [
       { name: "Ezhil K K", role: "CEO", image: "/images/ezhil.jpg.jpeg", linkedin: "https://www.linkedin.com/in/ezhilkathirvelan/" },
