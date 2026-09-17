@@ -52,10 +52,16 @@ import PublicMeetupPage from './pages/PublicMeetupPage';
 import BlogListPage from './pages/BlogListPage';
 import BlogDetail from './pages/user/BlogDetail';
 
-// Admin Pages
+// Admin Pages & Protection
+import AdminProtectedRoute from './components/admin/AdminProtectedRoute';
+import AdminLoginPage from './pages/admin/AdminLoginPage';
 import Dashboard from './pages/admin/Dashboard';
-import AnalyticsPage from './pages/admin/AnalyticsPage';
+import AdminSystemHealthPage from './pages/admin/AdminSystemHealthPage';
 import AllUserList from './pages/admin/AllUserList';
+import AdminUserDetailPage from './pages/admin/AdminUserDetailPage';
+import AdminRegistrationsManager from './pages/admin/AdminRegistrationsManager';
+import AdminAuditLogsPage from './pages/admin/AdminAuditLogsPage';
+import AdminSettingsPage from './pages/admin/AdminSettingsPage';
 import AdminScannerMeetup from './pages/admin/AdminScannerMeetup';
 import AdminMeetupList from './pages/admin/AdminMeetupList';
 import AdminMeetup from './pages/admin/AdminMeetup';
@@ -145,34 +151,45 @@ const AnimatedAppRoutes = () => {
             <Route path="/resource" element={<PageTransition><UserResource /></PageTransition>} />
 
             {/* ADMIN ROUTES */}
-            <Route path="/admin" element={<PageTransition><Dashboard /></PageTransition>} />
-            <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
-            <Route path="/admin/users" element={<PageTransition><AllUserList /></PageTransition>} />
-            <Route path="/admin/scanner/:id" element={<PageTransition><AdminScannerMeetup /></PageTransition>} />
-            <Route path="/admin/meetups" element={<PageTransition><AdminMeetupList /></PageTransition>} />
-            <Route path="/admin/meetup/create" element={<PageTransition><AdminMeetup /></PageTransition>} />
-            <Route path="/admin/meetup/edit/:meetupId" element={<PageTransition><AdminMeetupEdit /></PageTransition>} />
-            <Route path="/admin/meetup/registrations/:id" element={<PageTransition><AdminMeetupRegistrations /></PageTransition>} />
-            <Route path="/admin/programs" element={<PageTransition><AdminProgramsList /></PageTransition>} />
-            <Route path="/admin/programs/:id/submissions" element={<PageTransition><AdminProgramSubmissions /></PageTransition>} />
-            <Route path="/admin/mentorship-programs" element={<PageTransition><AdminMentorshipPrograms /></PageTransition>} />
-            <Route path="/admin/mentorship/manage/:id" element={<PageTransition><AdminMentorshipManager /></PageTransition>} />
-            <Route path="/admin/mentorship/create" element={<PageTransition><AdminMentorshipProgramEditor /></PageTransition>} />
-            <Route path="/admin/mentorship/edit/:id" element={<PageTransition><AdminMentorshipProgramEditor /></PageTransition>} />
-            <Route path="/admin/mentorship/program/:programId/week/create" element={<PageTransition><AdminWeekEditor /></PageTransition>} />
-            <Route path="/admin/mentorship/week/:weekId/edit" element={<PageTransition><AdminWeekEditor /></PageTransition>} />
-            <Route path="/admin/mentorship/submissions/:weekId" element={<PageTransition><AdminWeekSubmissions /></PageTransition>} />
-            <Route path="/admin/mentorship/general-requests" element={<PageTransition><AdminGeneralMentorshipRequests /></PageTransition>} />
-            <Route path="/admin/mentorship/all-registrations" element={<PageTransition><AdminAllProgramRegistrations /></PageTransition>} />
-            <Route path="/admin/blogs" element={<PageTransition><AdminBlogList /></PageTransition>} />
-            <Route path="/admin/blog/create" element={<PageTransition><AdminBlogEditor /></PageTransition>} />
-            <Route path="/admin/blog/edit/:id" element={<PageTransition><AdminBlogEditor /></PageTransition>} />
-            <Route path="/admin/blog/email/:id" element={<PageTransition><AdminBlogEmailer /></PageTransition>} />
-            <Route path="/admin/hall-of-fame" element={<PageTransition><AdminHallOfFame /></PageTransition>} />
-            <Route path="/admin/community-photos" element={<PageTransition><AdminCommunityPhotos /></PageTransition>} />
-            <Route path="/admin/feedback" element={<PageTransition><AdminFeedbackList /></PageTransition>} />
-            <Route path="/admin/form-builder" element={<PageTransition><AdminFormBuilder /></PageTransition>} />
-            <Route path="/admin/form-builder/:id" element={<PageTransition><AdminFormBuilder /></PageTransition>} />
+            {/* 1. Unprotected Admin Login */}
+            <Route path="/admin/login" element={<PageTransition><AdminLoginPage /></PageTransition>} />
+
+            {/* 2. Protected Admin Core Pages */}
+            <Route path="/admin" element={<AdminProtectedRoute><PageTransition><Dashboard /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/dashboard" element={<AdminProtectedRoute><PageTransition><Dashboard /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/system" element={<AdminProtectedRoute><PageTransition><AdminSystemHealthPage /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/users" element={<AdminProtectedRoute><PageTransition><AllUserList /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/users/:id" element={<AdminProtectedRoute><PageTransition><AdminUserDetailPage /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/registrations" element={<AdminProtectedRoute><PageTransition><AdminRegistrationsManager /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/audit-logs" element={<AdminProtectedRoute><PageTransition><AdminAuditLogsPage /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/settings" element={<AdminProtectedRoute><PageTransition><AdminSettingsPage /></PageTransition></AdminProtectedRoute>} />
+
+            {/* 3. Protected Existing Admin Subsystems */}
+            <Route path="/admin/scanner/:id" element={<AdminProtectedRoute><PageTransition><AdminScannerMeetup /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/meetups" element={<AdminProtectedRoute><PageTransition><AdminMeetupList /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/meetup/create" element={<AdminProtectedRoute><PageTransition><AdminMeetup /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/meetup/edit/:meetupId" element={<AdminProtectedRoute><PageTransition><AdminMeetupEdit /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/meetup/registrations/:id" element={<AdminProtectedRoute><PageTransition><AdminMeetupRegistrations /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/programs" element={<AdminProtectedRoute><PageTransition><AdminProgramsList /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/programs/:id/submissions" element={<AdminProtectedRoute><PageTransition><AdminProgramSubmissions /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship-programs" element={<AdminProtectedRoute><PageTransition><AdminMentorshipPrograms /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/manage/:id" element={<AdminProtectedRoute><PageTransition><AdminMentorshipManager /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/create" element={<AdminProtectedRoute><PageTransition><AdminMentorshipProgramEditor /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/edit/:id" element={<AdminProtectedRoute><PageTransition><AdminMentorshipProgramEditor /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/program/:programId/week/create" element={<AdminProtectedRoute><PageTransition><AdminWeekEditor /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/week/:weekId/edit" element={<AdminProtectedRoute><PageTransition><AdminWeekEditor /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/submissions/:weekId" element={<AdminProtectedRoute><PageTransition><AdminWeekSubmissions /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/general-requests" element={<AdminProtectedRoute><PageTransition><AdminGeneralMentorshipRequests /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/mentorship/all-registrations" element={<AdminProtectedRoute><PageTransition><AdminAllProgramRegistrations /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/blogs" element={<AdminProtectedRoute><PageTransition><AdminBlogList /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/blog/create" element={<AdminProtectedRoute><PageTransition><AdminBlogEditor /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/blog/edit/:id" element={<AdminProtectedRoute><PageTransition><AdminBlogEditor /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/blog/email/:id" element={<AdminProtectedRoute><PageTransition><AdminBlogEmailer /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/hall-of-fame" element={<AdminProtectedRoute><PageTransition><AdminHallOfFame /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/community-photos" element={<AdminProtectedRoute><PageTransition><AdminCommunityPhotos /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/feedback" element={<AdminProtectedRoute><PageTransition><AdminFeedbackList /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/form-builder" element={<AdminProtectedRoute><PageTransition><AdminFormBuilder /></PageTransition></AdminProtectedRoute>} />
+            <Route path="/admin/form-builder/:id" element={<AdminProtectedRoute><PageTransition><AdminFormBuilder /></PageTransition></AdminProtectedRoute>} />
 
             {/* 404 NOT FOUND */}
             <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />

@@ -1,406 +1,407 @@
+// src/pages/admin/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Users,
-  BarChart3,
-  Loader2,
-  Award,
-  Image,
-  MessageSquare,
-  Zap,
+  UserCheck,
+  Shield,
   Clock,
-  ArrowRight,
   Activity,
-  Smile,
-  PenTool
+  ClipboardList,
+  AlertCircle,
+  CheckCircle2,
+  RefreshCw,
+  Database,
+  Flame,
+  ArrowRight,
+  Sparkles,
+  ExternalLink,
 } from 'lucide-react';
-import { supabase } from '../../lib/supabaseClient';
-import { useNavigate } from 'react-router-dom';
 import AdminLayout from '../../components/AdminLayout';
-import { motion } from 'framer-motion';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
+import { isFirebaseConfigured } from '../../lib/firebaseClient';
+import { useAdminAuth } from '../../components/admin/AdminProtectedRoute';
 
-// --- CUSTOM HAND-DRAWN DOODLES (ANIMATED) ---
-const DrawVariant = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: {
-    pathLength: 1,
-    opacity: 1,
-    transition: { duration: 1.5, ease: "easeInOut" }
-  }
-};
-
-const HandDrawnCrown = () => (
-  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C2E812" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transform -rotate-12">
-    <motion.path
-      d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"
-      variants={DrawVariant} initial="hidden" animate="visible"
-    />
-  </svg>
-);
-
-const LightningBolt = () => (
-  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#FF5018" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transform rotate-12">
-    <motion.path
-      d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
-      animate={{ scale: [1, 1.1, 1], rotate: [12, 15, 12] }}
-      transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-    />
-  </svg>
-);
-
-const MessyOval = ({ width = 140, height = 65, color = "#0061FE" }) => (
-  <svg width={width} height={height} viewBox="0 0 140 65" className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-none">
-    <motion.path
-      d="M5,32.5 C5,10 35,5 70,5 C105,5 135,10 135,32.5 C135,55 105,60 70,60 C35,60 5,55 5,32.5 Z"
-      fill="none" stroke={color} strokeWidth="4"
-      variants={DrawVariant} initial="hidden" animate="visible"
-    />
-  </svg>
-);
-
-const SquiggleArrow = () => (
-  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="#C2E812" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-    <motion.path
-      d="M10,50 Q30,10 50,30 T55,10"
-      variants={DrawVariant} initial="hidden" animate="visible"
-    />
-    <motion.path d="M45,5 L55,10 L50,20" variants={DrawVariant} initial="hidden" animate="visible" />
-  </svg>
-);
-
-const HandDrawnHeart = () => (
-  <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#D83B01" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transform -rotate-6">
-    <motion.path
-      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-      animate={{ scale: [1, 1.05, 1] }}
-      transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-    />
-  </svg>
-);
-
-const FrameworkGrid = () => (
-  <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden h-full mix-blend-overlay opacity-20">
-    <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]"></div>
-  </div>
-);
-
-const Dashboard = () => {
-  const [profile, setProfile] = useState(null);
-  const [students, setStudents] = useState([]);
-  const [stats, setStats] = useState({
-    totalStudents: 0
-  });
+export default function Dashboard() {
+  const { user, profile, isSuperAdmin } = useAdminAuth();
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
+  const [dbLatency, setDbLatency] = useState(null);
 
-  useEffect(() => {
-    const fetchAdminData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  const [stats, setStats] = useState({
+    totalUsers: '—',
+    adminUsers: '—',
+    googleUsers: '—',
+    newUsersToday: '—',
+    newUsersWeek: '—',
+    totalRegistrations: '—',
+    meetupRegistrations: '—',
+    programRegistrations: '—',
+    mentorshipRegistrations: '—',
+  });
 
-        const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const [recentUsers, setRecentUsers] = useState([]);
 
-        if (authError || !user) {
-          setIsAuthenticated(false);
-          setLoading(false);
-          return;
-        }
+  const fetchDashboardMetrics = async () => {
+    setError(null);
+    if (!isSupabaseConfigured) {
+      setLoading(false);
+      return;
+    }
 
-        const { data: profileRows, error: profileError } = await supabase
-          .from('users')
-          .select('*')
-          .eq('uid', user.id);
+    try {
+      const startTime = performance.now();
 
-        const profileData = profileRows?.[0];
+      // 1. Fetch Users Data from public.users
+      const { data: usersData, error: usersError } = await supabase
+        .from('users')
+        .select('uid, email, display_name, role, avatar, created_at, phone_number')
+        .order('created_at', { ascending: false });
 
-        if (profileError || profileData?.role !== 'admin') {
-          navigate('/');
-          return;
-        }
+      const elapsed = Math.round(performance.now() - startTime);
+      setDbLatency(elapsed);
 
-        setProfile(profileData);
-        setIsAuthenticated(true);
+      if (usersError) throw usersError;
 
-        const { data: studentsData, error: studentsError } = await supabase
-          .from('users')
-          .select('*')
-          .eq('role', 'student')
-          .order('created_at', { ascending: false });
+      const userList = usersData || [];
+      const now = new Date();
+      const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-        if (studentsError) throw studentsError;
+      const adminCount = userList.filter((u) => {
+        const r = (u.role || '').toLowerCase();
+        return r === 'admin' || r === 'super_admin';
+      }).length;
 
-        const transformedStudents = studentsData?.map((student, index) => ({
-          id: student.uid,
-          name: student.display_name || student.email?.split('@')[0] || `Student ${index + 1}`,
-          email: student.email,
-          avatar: student.display_name?.charAt(0).toUpperCase() || student.email?.charAt(0).toUpperCase() || 'S',
-          status: student.admin_approved ? 'active' : 'inactive',
-          lastSeen: getRelativeTime(student.updated_at || student.created_at),
-          role: student.role,
-          college: student.college
-        })) || [];
+      const googleCount = userList.filter((u) => {
+        const email = (u.email || '').toLowerCase();
+        return email.endsWith('@gmail.com') || u.avatar?.includes('googleusercontent.com');
+      }).length;
 
-        setStudents(transformedStudents);
-        setStats({ totalStudents: transformedStudents.length });
+      const todayCount = userList.filter((u) => u.created_at && new Date(u.created_at) >= oneDayAgo).length;
+      const weekCount = userList.filter((u) => u.created_at && new Date(u.created_at) >= oneWeekAgo).length;
 
-      } catch (err) {
-        console.error('Error fetching admin data:', err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+      // 2. Query Registrations across available tables
+      let meetupRegCount = 0;
+      let progRegCount = 0;
+      let mentorRegCount = 0;
 
-    fetchAdminData();
-  }, [navigate]);
+      // Meetup registrations
+      const { count: mCount } = await supabase
+        .from('registrations')
+        .select('*', { count: 'exact', head: true });
+      if (typeof mCount === 'number') meetupRegCount = mCount;
 
-  const getRelativeTime = (dateString) => {
-    if (!dateString) return 'Never';
-    const now = new Date();
-    const date = new Date(dateString);
-    const diffInSeconds = Math.floor((now - date) / 1000);
+      // Program registrations
+      const { count: pCount } = await supabase
+        .from('program_registrations')
+        .select('*', { count: 'exact', head: true });
+      if (typeof pCount === 'number') progRegCount = pCount;
 
-    if (diffInSeconds < 60) return `${diffInSeconds}s ago`;
-    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
-    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
-    return `${Math.floor(diffInSeconds / 86400)}d ago`;
+      // Mentorship registrations
+      const { count: mentCount } = await supabase
+        .from('mentorship_registrations')
+        .select('*', { count: 'exact', head: true });
+      if (typeof mentCount === 'number') mentorRegCount = mentCount;
+
+      const totalReg = meetupRegCount + progRegCount + mentorRegCount;
+
+      setStats({
+        totalUsers: userList.length,
+        adminUsers: adminCount,
+        googleUsers: googleCount,
+        newUsersToday: todayCount,
+        newUsersWeek: weekCount,
+        totalRegistrations: totalReg,
+        meetupRegistrations: meetupRegCount,
+        programRegistrations: progRegCount,
+        mentorshipRegistrations: mentorRegCount,
+      });
+
+      setRecentUsers(userList.slice(0, 5));
+    } catch (err) {
+      console.error('[AdminDashboard] Fetch error:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
   };
 
-  const quickActions = [
-    {
-      icon: Users,
-      label: "MANAGE USERS",
-      desc: "Control the fleet",
-      color: "#0061FE",
-      onClick: () => navigate('/user-list')
-    },
-    {
-      icon: BarChart3,
-      label: "DATA & INSIGHTS",
-      desc: "Growth metrics",
-      color: "#C2E812",
-      onClick: () => navigate('/analytics')
-    },
-    {
-      icon: Award,
-      label: "HALL OF FAME",
-      desc: "Top performers",
-      color: "#FF5018",
-      onClick: () => navigate('/admin/hall-of-fame')
-    },
-    {
-      icon: Image,
-      label: "GALLERY",
-      desc: "Community shots",
-      color: "#F7F5F2",
-      textColor: "text-[#1E1E1E]",
-      onClick: () => navigate('/admin/community-photos')
-    },
-    {
-      icon: MessageSquare,
-      label: "FEEDBACK",
-      desc: "User voices",
-      color: "#1E1E1E",
-      textColor: "text-white",
-      onClick: () => navigate('/admin/feedback')
-    },
-    {
-      icon: PenTool,
-      label: "MANAGE FORMS",
-      desc: "Create & View Submissions",
-      color: "#C2E812", // Lime
-      onClick: () => navigate('/admin/programs')
-    }
-  ];
+  useEffect(() => {
+    fetchDashboardMetrics();
+  }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#1E1E1E]">
-        <Loader2 className="w-16 h-16 animate-spin text-[#C2E812]" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) return null;
+  const handleRefresh = () => {
+    setRefreshing(true);
+    fetchDashboardMetrics();
+  };
 
   return (
-    <AdminLayout>
-      <div className="min-h-screen bg-[#F7F5F2] font-sans text-[#1E1E1E] selection:bg-[#C2E812] selection:text-black overflow-x-hidden relative p-4 md:p-8">
-        <FrameworkGrid />
-
-        {/* --- HEADER SECTION --- */}
-        <div className="relative mb-20 mt-12">
-          {/* Floating Doodles */}
-          <motion.div className="absolute -top-12 left-0 z-20" animate={{ rotate: [-5, 5, -5] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
-            <HandDrawnCrown />
-          </motion.div>
-          <motion.div className="absolute top-10 right-10 md:right-32 z-20" animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-            <LightningBolt />
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="flex items-center gap-4 mb-4">
-              <div className="bg-[#1E1E1E] text-[#C2E812] px-4 py-1.5 font-black uppercase tracking-widest text-sm transform -rotate-2">
-                Admin Panel
-              </div>
-              <div className="font-bold text-[#1E1E1E] flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                {new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
-              </div>
+    <AdminLayout
+      title="Administrative Command Center"
+      subtitle="Real-time infrastructure health, user metrics, and registration activity across HackHere."
+    >
+      {/* Alert if not configured or query error */}
+      {error && (
+        <div className="p-4 rounded-2xl bg-red-950/40 border border-red-800/60 text-xs text-red-200 flex items-start justify-between gap-3">
+          <div className="flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 text-[#FF2D5D] shrink-0 mt-0.5" />
+            <div>
+              <p className="font-semibold text-white">Metrics Notice</p>
+              <p className="text-red-300/90 leading-relaxed mt-0.5">{error}</p>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 relative z-10 text-left text-[#1E1E1E]">
-              WE <span className="relative inline-block text-[#0061FE] z-10">
-                MANAGE
-                <MessyOval width={240} height={110} color="#C2E812" />
-              </span>.<br />
-              WE BUILD.
-            </h1>
-            <p className="text-xl md:text-2xl font-bold max-w-2xl leading-tight">
-              Welcome back, <span className="px-2 bg-[#C2E812] text-black transform -skew-x-12 inline-block">{profile?.display_name?.split(' ')[0] || 'Admin'}</span>.
-              You have <span className="underline decoration-4 decoration-[#FF5018] underline-offset-4">{stats.totalStudents} chaos pilots</span> (students) onboard today.
-            </p>
-          </motion.div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
-
-          {/* LEFT COL: ACTIONS & FEED */}
-          <div className="lg:col-span-8 space-y-16">
-
-            {/* QUICK ACTIONS */}
-            <section>
-              <div className="flex items-center gap-4 mb-8">
-                <SquiggleArrow />
-                <h3 className="text-4xl font-black tracking-tighter text-[#1E1E1E]">QUICK COMMANDS</h3>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {quickActions.map((action, index) => {
-                  const Icon = action.icon;
-                  return (
-                    <motion.button
-                      key={index}
-                      onClick={action.onClick}
-                      whileHover={{ y: -5, x: -5, boxShadow: "8px 8px 0px 0px rgba(0,0,0,1)" }}
-                      className={`relative group bg-white border-[3px] border-[#1E1E1E] p-6 text-left shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200`}
-                    >
-                      <div className="flex justify-between items-start mb-4">
-                        <div className={`p-3 border-[2px] border-[#1E1E1E] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`} style={{ backgroundColor: action.color }}>
-                          <Icon className={`w-6 h-6 ${action.textColor === 'text-white' ? 'text-white' : 'text-[#1E1E1E]'}`} />
-                        </div>
-                        <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity -rotate-45 group-hover:rotate-0" />
-                      </div>
-                      <h4 className="text-xl font-black leading-none mb-1">{action.label}</h4>
-                      <p className="text-sm font-bold text-gray-500 uppercase tracking-wide">{action.desc}</p>
-                    </motion.button>
-                  );
-                })}
-              </div>
-            </section>
-
-            {/* RECENT REGISTRATIONS (Brutalist List) */}
-            <section>
-              <div className="flex justify-between items-end mb-6 border-b-[3px] border-[#1E1E1E] pb-2">
-                <h3 className="text-4xl font-black tracking-tighter text-[#1E1E1E]">FRESH BLOOD</h3>
-                <button onClick={() => navigate('/user-list')} className="text-lg font-bold hover:bg-[#C2E812] px-2 transition-colors">VIEW ALL &rarr;</button>
-              </div>
-
-              <div className="space-y-4">
-                {students.slice(0, 5).map((student, idx) => (
-                  <motion.div
-                    key={student.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex items-center gap-4 bg-white p-4 border-[3px] border-[#1E1E1E] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
-                  >
-                    <div className="w-12 h-12 bg-[#F7F5F2] border-[2px] border-[#1E1E1E] flex items-center justify-center font-black text-xl">
-                      {student.avatar}
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-black leading-none">{student.name}</h4>
-                      <p className="text-xs font-bold text-gray-500 uppercase">{student.email}</p>
-                    </div>
-                    <div className="text-right flex flex-col items-end">
-                      <span className="bg-[#0061FE] text-white text-xs font-bold px-2 py-0.5 border border-black shadow-[1px_1px_0px_0px_black] mb-1">
-                        {student.college || 'NO COLLEGE'}
-                      </span>
-                      <span className="text-xs font-mono font-bold text-gray-400">{student.lastSeen}</span>
-                    </div>
-                  </motion.div>
-                ))}
-                {students.length === 0 && (
-                  <div className="p-8 border-[3px] border-dashed border-[#1E1E1E] text-center bg-white">
-                    <Smile className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                    <p className="font-bold text-gray-500">No new recruits yet.</p>
-                  </div>
-                )}
-              </div>
-            </section>
-
           </div>
+          <button
+            onClick={handleRefresh}
+            className="px-3 py-1.5 rounded-lg bg-red-900/40 hover:bg-red-900/60 text-white font-mono text-[11px] font-bold"
+          >
+            Retry
+          </button>
+        </div>
+      )}
 
-          {/* RIGHT COL: FEED & WIDGETS */}
-          <div className="lg:col-span-4 space-y-12">
-
-            {/* ACTIVITY LOG */}
-            <section className="bg-[#1E1E1E] text-white p-6 border-[3px] border-[#1E1E1E] shadow-[8px_8px_0px_0px_#C2E812] relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4 opacity-20">
-                <Activity className="w-24 h-24" />
-              </div>
-              <h3 className="text-2xl font-black mb-6 tracking-tighter text-[#C2E812]">LIVE ENTROPY</h3>
-
-              <div className="space-y-8 relative pl-4 border-l-[3px] border-white/20">
-                {/* Fake System Event */}
-                <div className="relative">
-                  <div className="absolute -left-[23px] top-1 w-4 h-4 bg-[#0061FE] border-2 border-white rounded-full"></div>
-                  <p className="font-bold leading-tight">System backup completed.</p>
-                  <span className="text-xs font-mono text-gray-400">12:00 AM</span>
-                </div>
-
-                {students.slice(0, 4).map((student, idx) => (
-                  <div key={idx} className="relative">
-                    <div className="absolute -left-[23px] top-1 w-4 h-4 bg-[#FF5018] border-2 border-white rounded-full"></div>
-                    <p className="leading-tight text-sm">
-                      <span className="font-black text-[#C2E812]">{student.name}</span> <span className="font-medium text-gray-300">spawned in the world.</span>
-                    </p>
-                    <span className="text-xs font-mono text-gray-500">{student.lastSeen}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* PRO TIP WIDGET */}
-            <section className="bg-[#C2E812] p-6 border-[3px] border-[#1E1E1E] shadow-[8px_8px_0px_0px_#1E1E1E] relative">
-              <div className="absolute -top-6 -right-6 transform rotate-12">
-                <HandDrawnHeart />
-              </div>
-
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-[#1E1E1E] p-2 text-white">
-                  <Zap className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-black text-[#1E1E1E]">PRO TIP</h3>
-              </div>
-              <p className="font-bold text-lg leading-tight mb-6">
-                Engagement drops when you're boring. Reply to <span className="bg-white px-1">Community Photos</span> to keep the chaos alive.
+      {/* TOP SYSTEM STATUS BAR */}
+      <section className="bg-[#111820] border border-[#263640] rounded-3xl p-5 sm:p-6 shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-[#080B10] border border-[#263640] flex items-center justify-center">
+              <Activity className="w-5 h-5 text-[#61C8D4]" />
+            </div>
+            <div>
+              <h2 className="text-sm font-serif text-white">Live Backend Status</h2>
+              <p className="text-[11px] text-[#8CA2AD] font-sans">
+                Real-time connection telemetry from Supabase & Firebase services
               </p>
-              <button
-                onClick={() => navigate('/analytics')}
-                className="w-full bg-[#1E1E1E] text-white font-black py-3 hover:bg-[#0061FE] transition-colors border-2 border-transparent hover:border-black"
-              >
-                CHECK STATS
-              </button>
-            </section>
-
+            </div>
           </div>
 
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {/* Supabase Status Pill */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#080B10] border border-[#263640] text-[11px] font-mono">
+              <Database className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-[#8CA2AD]">Supabase:</span>
+              <span className={isSupabaseConfigured ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
+                {isSupabaseConfigured ? 'Connected' : 'Not Configured'}
+              </span>
+              {dbLatency && (
+                <span className="text-[10px] text-[#8CA2AD]">({dbLatency}ms)</span>
+              )}
+            </div>
+
+            {/* Firebase Status Pill */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#080B10] border border-[#263640] text-[11px] font-mono">
+              <Flame className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-[#8CA2AD]">Firebase:</span>
+              <span className={isFirebaseConfigured ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
+                {isFirebaseConfigured ? 'Configured' : 'Not Configured'}
+              </span>
+            </div>
+
+            {/* Refresh Button */}
+            <button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="p-2 rounded-full border border-[#263640] bg-[#080B10] hover:bg-[#263640] text-[#DCE8EB] transition-colors"
+              title="Refresh telemetry"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin text-[#61C8D4]' : ''}`} />
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* CORE KPI CARDS GRID */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* TOTAL REGISTERED APP USERS */}
+        <div className="p-6 rounded-3xl bg-[#111820] border border-[#263640] space-y-3 relative overflow-hidden group">
+          <div className="flex items-center justify-between text-[#8CA2AD]">
+            <span className="text-[11px] font-mono uppercase tracking-wider font-bold">TOTAL USERS</span>
+            <Users className="w-4 h-4 text-[#61C8D4]" />
+          </div>
+          <div>
+            <span className="text-3xl sm:text-4xl font-serif text-white block">
+              {loading ? '...' : stats.totalUsers}
+            </span>
+            <span className="text-[10px] font-mono text-[#8CA2AD] block mt-1">
+              Registered in <code className="text-[#61C8D4]">public.users</code>
+            </span>
+          </div>
+        </div>
+
+        {/* TOTAL REGISTRATIONS */}
+        <div className="p-6 rounded-3xl bg-[#111820] border border-[#263640] space-y-3 relative overflow-hidden group">
+          <div className="flex items-center justify-between text-[#8CA2AD]">
+            <span className="text-[11px] font-mono uppercase tracking-wider font-bold">REGISTRATIONS</span>
+            <ClipboardList className="w-4 h-4 text-[#FF2D5D]" />
+          </div>
+          <div>
+            <span className="text-3xl sm:text-4xl font-serif text-white block">
+              {loading ? '...' : stats.totalRegistrations}
+            </span>
+            <span className="text-[10px] font-mono text-[#8CA2AD] block mt-1">
+              Meetups ({stats.meetupRegistrations}) • Programs ({stats.programRegistrations})
+            </span>
+          </div>
+        </div>
+
+        {/* ADMIN ACCOUNTS */}
+        <div className="p-6 rounded-3xl bg-[#111820] border border-[#263640] space-y-3 relative overflow-hidden group">
+          <div className="flex items-center justify-between text-[#8CA2AD]">
+            <span className="text-[11px] font-mono uppercase tracking-wider font-bold">ADMIN ACCOUNTS</span>
+            <Shield className="w-4 h-4 text-purple-400" />
+          </div>
+          <div>
+            <span className="text-3xl sm:text-4xl font-serif text-white block">
+              {loading ? '...' : stats.adminUsers}
+            </span>
+            <span className="text-[10px] font-mono text-[#8CA2AD] block mt-1">
+              Privileged role holders
+            </span>
+          </div>
+        </div>
+
+        {/* NEW USERS THIS WEEK */}
+        <div className="p-6 rounded-3xl bg-[#111820] border border-[#263640] space-y-3 relative overflow-hidden group">
+          <div className="flex items-center justify-between text-[#8CA2AD]">
+            <span className="text-[11px] font-mono uppercase tracking-wider font-bold">NEW THIS WEEK</span>
+            <Clock className="w-4 h-4 text-emerald-400" />
+          </div>
+          <div>
+            <span className="text-3xl sm:text-4xl font-serif text-white block">
+              {loading ? '...' : stats.newUsersWeek}
+            </span>
+            <span className="text-[10px] font-mono text-[#8CA2AD] block mt-1">
+              Today: {stats.newUsersToday} new signups
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* QUICK WORKFLOW SHORTCUTS */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Link
+          to="/admin/users"
+          className="p-5 rounded-2xl bg-[#111820] border border-[#263640] hover:border-[#61C8D4] transition-all duration-300 group flex items-center justify-between"
+        >
+          <div>
+            <p className="text-xs font-mono uppercase font-bold text-white group-hover:text-[#61C8D4] transition-colors">
+              Manage Users
+            </p>
+            <p className="text-[11px] text-[#8CA2AD] mt-0.5">Inspect user records & roles</p>
+          </div>
+          <ArrowRight className="w-4 h-4 text-[#8CA2AD] group-hover:translate-x-1 group-hover:text-[#61C8D4] transition-all" />
+        </Link>
+
+        <Link
+          to="/admin/registrations"
+          className="p-5 rounded-2xl bg-[#111820] border border-[#263640] hover:border-[#FF2D5D] transition-all duration-300 group flex items-center justify-between"
+        >
+          <div>
+            <p className="text-xs font-mono uppercase font-bold text-white group-hover:text-[#FF2D5D] transition-colors">
+              Review Registrations
+            </p>
+            <p className="text-[11px] text-[#8CA2AD] mt-0.5">Meetup & program rosters</p>
+          </div>
+          <ArrowRight className="w-4 h-4 text-[#8CA2AD] group-hover:translate-x-1 group-hover:text-[#FF2D5D] transition-all" />
+        </Link>
+
+        <Link
+          to="/admin/system"
+          className="p-5 rounded-2xl bg-[#111820] border border-[#263640] hover:border-emerald-400 transition-all duration-300 group flex items-center justify-between"
+        >
+          <div>
+            <p className="text-xs font-mono uppercase font-bold text-white group-hover:text-emerald-400 transition-colors">
+              System Diagnostics
+            </p>
+            <p className="text-[11px] text-[#8CA2AD] mt-0.5">Supabase & Firebase health checks</p>
+          </div>
+          <ArrowRight className="w-4 h-4 text-[#8CA2AD] group-hover:translate-x-1 group-hover:text-emerald-400 transition-all" />
+        </Link>
+
+        <Link
+          to="/admin/audit-logs"
+          className="p-5 rounded-2xl bg-[#111820] border border-[#263640] hover:border-purple-400 transition-all duration-300 group flex items-center justify-between"
+        >
+          <div>
+            <p className="text-xs font-mono uppercase font-bold text-white group-hover:text-purple-400 transition-colors">
+              Audit Logs
+            </p>
+            <p className="text-[11px] text-[#8CA2AD] mt-0.5">View privileged administrative history</p>
+          </div>
+          <ArrowRight className="w-4 h-4 text-[#8CA2AD] group-hover:translate-x-1 group-hover:text-purple-400 transition-all" />
+        </Link>
+      </section>
+
+      {/* RECENT USERS SECTION */}
+      <section className="bg-[#111820] border border-[#263640] rounded-3xl p-6 sm:p-8 space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-serif text-white">Recently Registered Builders</h3>
+            <p className="text-xs text-[#8CA2AD] font-sans">Latest members added to the database</p>
+          </div>
+          <Link
+            to="/admin/users"
+            className="text-xs font-mono font-bold text-[#61C8D4] hover:underline flex items-center gap-1"
+          >
+            <span>View All Users</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        {recentUsers.length === 0 ? (
+          <div className="p-8 text-center border border-dashed border-[#263640] rounded-2xl">
+            <p className="text-xs font-mono text-[#8CA2AD]">
+              {loading ? 'Querying database...' : 'No users registered yet or database table is unpopulated.'}
+            </p>
+          </div>
+        ) : (
+          <div className="divide-y divide-[#263640]/60 overflow-hidden">
+            {recentUsers.map((u) => {
+              const roleVal = (u.role || 'user').toLowerCase();
+              const isAdmin = roleVal === 'admin' || roleVal === 'super_admin';
+              return (
+                <div key={u.uid} className="py-3.5 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-9 h-9 rounded-full bg-[#080B10] border border-[#263640] flex items-center justify-center font-mono font-bold text-xs text-[#61C8D4] shrink-0">
+                      {u.email ? u.email[0].toUpperCase() : 'U'}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-white truncate">
+                        {u.display_name || u.email?.split('@')[0] || 'Builder'}
+                      </p>
+                      <p className="text-[11px] font-mono text-[#8CA2AD] truncate">{u.email}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span
+                      className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full border ${
+                        isAdmin
+                          ? 'bg-[#61C8D4]/10 text-[#61C8D4] border-[#61C8D4]/40'
+                          : 'bg-[#263640] text-[#DCE8EB] border-transparent'
+                      }`}
+                    >
+                      {u.role || 'user'}
+                    </span>
+                    <span className="text-[10px] font-mono text-[#8CA2AD] hidden sm:inline">
+                      {u.created_at ? new Date(u.created_at).toLocaleDateString() : '—'}
+                    </span>
+                    <Link
+                      to={`/admin/users/${u.uid}`}
+                      className="p-1.5 rounded-lg border border-[#263640] bg-[#080B10] hover:border-[#61C8D4] text-[#DCE8EB] transition-colors"
+                      title="View user details"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
     </AdminLayout>
   );
-};
-
-export default Dashboard;
+}
