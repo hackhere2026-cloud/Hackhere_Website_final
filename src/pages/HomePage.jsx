@@ -383,7 +383,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="text-xs font-mono text-[#4A5568]">
-              AIVENTRA • VORTEXA • WORKSHOPS • TEAM SPRINTS
+              VORTEXA • NEXORA • WORKSHOPS • TEAM SPRINTS
             </p>
           </div>
 

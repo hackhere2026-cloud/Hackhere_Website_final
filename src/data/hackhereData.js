@@ -71,39 +71,39 @@ export const HACKHERE_PILLARS = FOUR_PILLARS;
 // =========================================================================
 export const MOMENTS_FROM_HACKHERE = [
   {
-    title: "AIVENTRA 2025 Grand Finale",
+    title: "VORTEXA 2025 Offline Build Sprint",
     category: "Hackathon Sprints",
-    subtitle: "AIVENTRA 2025 Grand Finale",
-    image: "/aiventra/aiventra-4.jpg",
-    location: "Bangalore Hub"
+    subtitle: "24-Hour Non-Stop Engineering",
+    image: "/vortexa/vortexa-1.jpg",
+    location: "SNS IHUB, Coimbatore"
+  },
+  {
+    title: "NEXORA 2026 Opening Keynote",
+    category: "Flagship Keynotes",
+    subtitle: "600+ Builders Assembled",
+    image: "/nexora/gallery/nexora-1.jpg",
+    location: "SNS IHUB, Coimbatore"
   },
   {
     title: "Midnight Systems Architecture Review",
     category: "Mentor Checkpoints",
-    subtitle: "Midnight Systems Architecture Review",
-    image: "/vortexa/vortexa-3.jpg",
+    subtitle: "Deep-Tech Prototype Audits",
+    image: "/vortexa/vortexa-7.jpg",
     location: "VORTEXA 2025"
   },
   {
     title: "Live Prototype Demos on Stage",
     category: "Finalist Pitches",
-    subtitle: "Live Prototype Demos on Stage",
-    image: "/aiventra/aiventra-9.jpg",
+    subtitle: "Jury Reviews & Live Demonstrations",
+    image: "/nexora/gallery/nexora-6.jpg",
     location: "Auditorium"
-  },
-  {
-    title: "Hands-on Generative AI Masterclass",
-    category: "Technical Workshops",
-    subtitle: "Hands-on Generative AI Masterclass",
-    image: "/aiventra/aiventra-5.jpg",
-    location: "Campus Hub"
   },
   {
     title: "Collaborative Hardware & IoT Hacking",
     category: "Makerspace Sprints",
-    subtitle: "Collaborative Hardware & IoT Hacking",
+    subtitle: "Collaborative Engineering & Prototyping",
     image: "/vortexa/vortexa-9.jpg",
-    location: "Lab Track"
+    location: "SNS IHUB Lab Track"
   }
 ];
 
