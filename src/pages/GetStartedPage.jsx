@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import {
-  GraduationCap, Code, Compass, Mic, Heart, Building2,
+  GraduationCap, Compass, Mic, Heart, Building2,
   CheckCircle2, ArrowRight, Sparkles, Send, ArrowUpRight, Check
 } from "lucide-react";
 import { toast } from "react-hot-toast";
@@ -10,7 +10,8 @@ import CTABanner from "../components/CTABanner";
 
 export default function GetStartedPage() {
   const [searchParams] = useSearchParams();
-  const initialRole = searchParams.get("role") || "student";
+  const paramRole = searchParams.get("role");
+  const initialRole = (paramRole && paramRole !== "builder") ? paramRole : "student";
   const [selectedRole, setSelectedRole] = useState(initialRole);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -41,26 +42,6 @@ export default function GetStartedPage() {
         portfolioLabel: "GitHub Profile / Portfolio Link",
         placeholderPortfolio: "https://github.com/username",
         notesPlaceholder: "What domains or frameworks are you most eager to build with?"
-      }
-    },
-    builder: {
-      title: "Active Developer / Engineer Pathway",
-      tagline: "Ship ambitious code, compete for prize grants, and find technical co-founders.",
-      requirements: [
-        "Working proficiency in at least one modern language/stack (React, Python, Go, Rust, etc.)",
-        "Desire to tackle high-scale distributed problems and AI agent systems",
-        "Active GitHub presence or verifiable deployed projects"
-      ],
-      benefits: [
-        "Access to sponsored API & cloud compute grants ($1,000+ value)",
-        "Direct exposure to VC investors and startup CTOs",
-        "Opportunity to win from ₹12.5L+ annual prize pool",
-        "Fast-track interviews with hiring partner startups"
-      ],
-      formFields: {
-        portfolioLabel: "GitHub Profile or Deployed Web App",
-        placeholderPortfolio: "https://github.com/username or your live URL",
-        notesPlaceholder: "Tell us about the most challenging system or feature you've engineered."
       }
     },
     mentor: {
@@ -200,10 +181,9 @@ export default function GetStartedPage() {
       {/* 2. ROLE SELECTION BUTTONS MATRIX                          */}
       {/* ========================================================= */}
       <section className="py-16 max-w-[1400px] w-full mx-auto px-6 sm:px-12 font-sans">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {[
             { id: "student", label: "STUDENT BUILDER", icon: GraduationCap },
-            { id: "builder", label: "ACTIVE DEVELOPER", icon: Code },
             { id: "mentor", label: "TECH MENTOR", icon: Compass },
             { id: "speaker", label: "SPEAKER", icon: Mic },
             { id: "volunteer", label: "VOLUNTEER", icon: Heart },
