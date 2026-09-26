@@ -306,113 +306,6 @@ export const eventsData = [
     hideWinningProjects: true
   },
   {
-    id: "quantexa",
-    title: "QUANTEXA 2026",
-    tagline: "Decoding Risks. Engineering Solutions. — Think Quantum • Shape The Future",
-    category: "upcoming-hackathon",
-    type: "Hackathon",
-    date: "September 19–20, 2026",
-    location: "SNS IHUB, Coimbatore",
-    status: "Registration Open",
-    heroImage: "/quantexa/quantexa_banner.webp",
-    description: "QUANTEXA 2026 is HackHere's premier 24-hour offline hackathon hosted at SNS IHUB, Coimbatore. Compete across Quantum Technology and Finance Technology domains to decode systemic risk, engineer deep-tech algorithms, and compete for ₹30,000 cash prizes, direct corporate internships, and Hedera certifications.",
-    aboutLong: "QUANTEXA 2026 is a 24-hour hackathon crucible presented by HackHere at SNS IHUB, Coimbatore. Focused on Quantum Technology (quantum computing, cryptography, decision intelligence) and Finance Technology (risk scoring, automated compliance, financial telemetry), builders engage in a non-stop build sprint with continuous mentorship, compute credits from Featherless AI, Hedera Web3 certifications, and jury evaluations from top industry CISOs and HR leaders.",
-    prizePool: "₹30,000",
-    track: "Quantum & Finance Technology",
-    participants: "180–200+",
-    venueFull: "SNS IHUB, SNS College of Technology Campus, Sathy Main Road, Coimbatore, Tamil Nadu 641035",
-    venueMapUrl: "https://maps.app.goo.gl/5Qv5T9LsVeL58uxd8",
-    registrationUrl: "https://unstop.com/hackathons/quantexa-hackhere-1745790",
-    websiteUrl: "https://quantexa.hackhere.in/",
-    ctaLink: "https://quantexa.hackhere.in/",
-    rounds: [
-      { round: "Phase 1: Launch & Registration", date: "Registration Open on Unstop", description: "Direct entry registration — Register your team of 1–4 participants on Unstop to secure your slot for the 24-hour offline grand finale." },
-      { round: "Phase 2: Preparation & Ideation", date: "September 1 – September 18, 2026", description: "Explore challenge domains, review technical documentation, refine your architecture, and prepare for the physical build sprint." },
-      { round: "Phase 3: 24-Hour Offline Sprint", date: "September 19 – September 20, 2026", description: "Build your working prototype live at SNS IHUB, Coimbatore over a continuous 24-hour period. Problem statements provided on the spot." },
-      { round: "Phase 4: Pitch & Grand Finale Awards", date: "September 20, 2026", description: "Present your working prototype live to our jury panel and chief guests to compete for ₹30K cash prizes, internships & certifications." }
-    ],
-    stats: [
-      { label: "Sprint Duration", value: "24 Hours" },
-      { label: "Prize Pool", value: "₹30,000" },
-      { label: "Domains", value: "Quantum & FinTech" },
-      { label: "Venue", value: "SNS IHUB, Coimbatore" },
-      { label: "Participants", value: "180–200+" }
-    ],
-    tracks: [
-      {
-        title: "Quantum Technology",
-        desc: "Quantum Computing, Quantum Information Processing & Decision Intelligence — Build quantum-inspired algorithms, quantum cryptography, decision intelligence frameworks, and deep tech quantum simulations."
-      },
-      {
-        title: "Finance Technology",
-        desc: "FinTech Innovation & Risk Telemetry — Build automated financial risk scoring, fraud detection algorithms, algorithmic trading tools, and secure decentralized financial telemetry."
-      }
-    ],
-    prizes: [
-      { title: "Grand Cash Prize Pool", amount: "₹30,000", badge: "Main Pool" },
-      { title: "Direct Internship Offers", amount: "Partner Companies", badge: "Career Fast-Track" },
-      { title: "Hedera Web3 Certification", amount: "Official Developer Badges", badge: "Blockchain Credential" },
-      { title: "Featherless AI Credits", amount: "$325 AI Credits & Inference", badge: "AI Computing" },
-      { title: "Technical Blockchain Bootcamp", amount: "Web3 Architecture & Dev", badge: "Training Access" },
-      { title: "Physical Participation Certificate", amount: "Official Hardcopy", badge: "All Participants" }
-    ],
-    agenda: [
-      { time: "Sept 19 - 09:00 AM", title: "Venue Check-in & Lab Allocation", desc: "Arrival at SNS IHUB, Coimbatore. Squad verification, badge distribution, and terminal provisioning." },
-      { time: "Sept 19 - 10:00 AM", title: "Keynote & Problem Briefing", desc: "Official launch keynote, reveal of Quantum and FinTech problem statements, and evaluation criteria overview." },
-      { time: "Sept 19 - 11:00 AM", title: "24-Hour Non-Stop Sprint Begins", desc: "Hacking begins! Teams commence prototype development with on-demand access to mentors and Featherless AI compute." },
-      { time: "Sept 19 - 04:00 PM", title: "Architecture Review 1", desc: "Mentors conduct first checkpoint review on solution feasibility and technical approach." },
-      { time: "Sept 19 - 09:00 PM", title: "Midnight Review & Code Audit", desc: "1-on-1 technical feedback checkpoints with senior architects, CISOs, and domain evaluators." },
-      { time: "Sept 20 - 08:00 AM", title: "Final Sprint & Demo Prep", desc: "Testing, containerization, slide preparation, and final commit freeze preparations." },
-      { time: "Sept 20 - 11:00 AM", title: "Code Freeze & Submission", desc: "Final repository commit freeze and Unstop project submission." },
-      { time: "Sept 20 - 01:00 PM", title: "Grand Stage Pitch & Jury Evaluation", desc: "Teams pitch live prototypes before the expert jury panel evaluated on Innovation, Execution, Impact, and Presentation." },
-      { time: "Sept 20 - 04:00 PM", title: "Awards Ceremony & Internship Distribution", desc: "Announcement of winners, ₹30,000 prize distribution, Hedera Web3 certifications, and partner internship handovers." }
-    ],
-    chiefGuests: [
-      {
-        name: "Dr. M. Saravanakumar",
-        degrees: "MBA., Ms(IT)., M.Phil., Ph.D.",
-        title: "Dean",
-        company: "Anna University Regional Campus Coimbatore",
-        badge: "Chief Jury & Evaluator",
-        image: "/juries/dr_m_saravanakumar.png",
-        bio: "Dean at Anna University Regional Campus Coimbatore, driving academic leadership, technological innovation, and empowering the next generation of engineers."
-      },
-      {
-        name: "Reinard Abhishek J",
-        title: "HR",
-        company: "ELRO Tech",
-        badge: "Official Jury",
-        image: "/juries/jury_3.jpeg",
-        bio: "HR at ELRO Tech, empowering talent acquisition, organizational growth, and human resources strategy."
-      },
-      {
-        name: "Dr. A. Kumar",
-        title: "Dean – Projects & Student Affairs / Head of AI & DS",
-        company: "RVS College of Engineering and Technology",
-        badge: "Chief Guest",
-        image: "/juries/dr_a_kumar.jpeg",
-        bio: "Dean – Projects & Student Affairs and Head of AI & DS at RVS College of Engineering and Technology, fostering academic innovation and advanced AI research."
-      }
-    ],
-    organizers: [
-      { name: "Ezhil K K", role: "CEO", image: "/images/ezhil.jpg.jpeg", linkedin: "https://www.linkedin.com/in/ezhilkathirvelan/" },
-      { name: "K Guru Prakash", role: "CTO", image: "/images/guru.jpg.jpeg", linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/" },
-      { name: "Rithika S", role: "COO", image: "/images/rithika.jpg.jpeg", linkedin: "https://www.linkedin.com/in/rithika-somasundaram/" },
-      { name: "Shubaashree S", role: "CMO", image: "/images/shubaashree.jpg.jpeg", linkedin: "https://www.linkedin.com/in/shubaashreesureshbabu/" }
-    ],
-    sponsors: [
-      { name: "Featherless AI", tier: "AI Compute Partner", logo: "Featherless AI", color: "#61C8D4", image: "/images/sponsors/featherlessai.jpeg" },
-      { name: "ELRO Tech", tier: "Corporate Partner", logo: "ELRO Tech", color: "#D4A843", image: "/images/sponsors/elro.jpeg" },
-      { name: "LeSuccess", tier: "Ecosystem Partner", logo: "LeSuccess", color: "#FF6C37", image: "/images/sponsors/lesuccess.png" },
-      { name: "DELYON", tier: "Partner Sponsor", logo: "DELYON", color: "#3ECF8E", image: "/images/sponsors/delyon.png" },
-      { name: "ELYON Clothing", tier: "Merchandise Partner", logo: "ELYON", color: "#3ECF8E", image: "/images/sponsors/elyon.jpeg" },
-      { name: "HackHere", tier: "Presenting Partner", logo: "HackHere", color: "#FF2D5D", image: "/images/sponsors/hackhere.png" }
-    ],
-    gallery: [],
-    winnerProjectIds: [],
-    hideWinningProjects: true
-  },
-  {
     id: "nexora",
     title: "NEXORA 2026",
     tagline: "BEYOND LIMITS. BEYOND IMAGINATION. — The Flagship AI, Cyber & Blockchain Hackathon",
@@ -511,6 +404,113 @@ export const eventsData = [
       "/nexora/gallery/nexora-10.jpg",
       "/nexora/gallery/nexora-11.jpg"
     ],
+    winnerProjectIds: [],
+    hideWinningProjects: true
+  },
+  {
+    id: "quantexa",
+    title: "QUANTEXA 2026",
+    tagline: "Decoding Risks. Engineering Solutions. — Think Quantum • Shape The Future",
+    category: "completed",
+    type: "Hackathon",
+    date: "September 19–20, 2026",
+    location: "SNS IHUB, Coimbatore",
+    status: "Completed",
+    heroImage: "/quantexa/quantexa_banner.webp",
+    description: "QUANTEXA 2026 was HackHere's premier 24-hour offline hackathon held at SNS IHUB, Coimbatore. 180+ builders competed across Quantum Technology and Finance Technology domains to decode systemic risk, engineer deep-tech algorithms, and compete for ₹30,000 cash prizes, direct corporate internships, and Hedera certifications.",
+    aboutLong: "QUANTEXA 2026 was a 24-hour hackathon crucible presented by HackHere at SNS IHUB, Coimbatore. Focused on Quantum Technology (quantum computing, cryptography, decision intelligence) and Finance Technology (risk scoring, automated compliance, financial telemetry), builders engaged in a non-stop build sprint with continuous mentorship, compute credits from Featherless AI, Hedera Web3 certifications, and jury evaluations from top industry CISOs and HR leaders.",
+    prizePool: "₹30,000",
+    track: "Quantum & Finance Technology",
+    participants: "180–200+",
+    venueFull: "SNS IHUB, SNS College of Technology Campus, Sathy Main Road, Coimbatore, Tamil Nadu 641035",
+    venueMapUrl: "https://maps.app.goo.gl/5Qv5T9LsVeL58uxd8",
+    registrationUrl: "https://unstop.com/hackathons/quantexa-hackhere-1745790",
+    websiteUrl: "https://quantexa.hackhere.in/",
+    ctaLink: "https://quantexa.hackhere.in/",
+    rounds: [
+      { round: "Phase 1: Launch & Registration", date: "Registration on Unstop", description: "Direct entry registration — Squads of 1–4 participants registered on Unstop to secure slots for the 24-hour offline grand finale." },
+      { round: "Phase 2: Preparation & Ideation", date: "September 1 – September 18, 2026", description: "Explored challenge domains, reviewed technical documentation, refined architecture, and prepared for the physical build sprint." },
+      { round: "Phase 3: 24-Hour Offline Sprint", date: "September 19 – September 20, 2026", description: "Built working prototypes live at SNS IHUB, Coimbatore over a continuous 24-hour period with problem statements unveiled onsite." },
+      { round: "Phase 4: Pitch & Grand Finale Awards", date: "September 20, 2026", description: "Presented working prototypes live to jury panel and chief guests, concluding with ₹30K cash prize awards, internships & certifications." }
+    ],
+    stats: [
+      { label: "Sprint Duration", value: "24 Hours" },
+      { label: "Prize Pool", value: "₹30,000" },
+      { label: "Domains", value: "Quantum & FinTech" },
+      { label: "Venue", value: "SNS IHUB, Coimbatore" },
+      { label: "Participants", value: "180–200+" }
+    ],
+    tracks: [
+      {
+        title: "Quantum Technology",
+        desc: "Quantum Computing, Quantum Information Processing & Decision Intelligence — Build quantum-inspired algorithms, quantum cryptography, decision intelligence frameworks, and deep tech quantum simulations."
+      },
+      {
+        title: "Finance Technology",
+        desc: "FinTech Innovation & Risk Telemetry — Build automated financial risk scoring, fraud detection algorithms, algorithmic trading tools, and secure decentralized financial telemetry."
+      }
+    ],
+    prizes: [
+      { title: "Grand Cash Prize Pool", amount: "₹30,000", badge: "Main Pool" },
+      { title: "Direct Internship Offers", amount: "Partner Companies", badge: "Career Fast-Track" },
+      { title: "Hedera Web3 Certification", amount: "Official Developer Badges", badge: "Blockchain Credential" },
+      { title: "Featherless AI Credits", amount: "$325 AI Credits & Inference", badge: "AI Computing" },
+      { title: "Technical Blockchain Bootcamp", amount: "Web3 Architecture & Dev", badge: "Training Access" },
+      { title: "Physical Participation Certificate", amount: "Official Hardcopy", badge: "All Participants" }
+    ],
+    agenda: [
+      { time: "Sept 19 - 09:00 AM", title: "Venue Check-in & Lab Allocation", desc: "Arrival at SNS IHUB, Coimbatore. Squad verification, badge distribution, and terminal provisioning." },
+      { time: "Sept 19 - 10:00 AM", title: "Keynote & Problem Briefing", desc: "Official launch keynote, reveal of Quantum and FinTech problem statements, and evaluation criteria overview." },
+      { time: "Sept 19 - 11:00 AM", title: "24-Hour Non-Stop Sprint Begins", desc: "Hacking begins! Teams commence prototype development with on-demand access to mentors and Featherless AI compute." },
+      { time: "Sept 19 - 04:00 PM", title: "Architecture Review 1", desc: "Mentors conduct first checkpoint review on solution feasibility and technical approach." },
+      { time: "Sept 19 - 09:00 PM", title: "Midnight Review & Code Audit", desc: "1-on-1 technical feedback checkpoints with senior architects, CISOs, and domain evaluators." },
+      { time: "Sept 20 - 08:00 AM", title: "Final Sprint & Demo Prep", desc: "Testing, containerization, slide preparation, and final commit freeze preparations." },
+      { time: "Sept 20 - 11:00 AM", title: "Code Freeze & Submission", desc: "Final repository commit freeze and Unstop project submission." },
+      { time: "Sept 20 - 01:00 PM", title: "Grand Stage Pitch & Jury Evaluation", desc: "Teams pitch live prototypes before the expert jury panel evaluated on Innovation, Execution, Impact, and Presentation." },
+      { time: "Sept 20 - 04:00 PM", title: "Awards Ceremony & Internship Distribution", desc: "Announcement of winners, ₹30,000 prize distribution, Hedera Web3 certifications, and partner internship handovers." }
+    ],
+    chiefGuests: [
+      {
+        name: "Dr. M. Saravanakumar",
+        degrees: "MBA., Ms(IT)., M.Phil., Ph.D.",
+        title: "Dean",
+        company: "Anna University Regional Campus Coimbatore",
+        badge: "Chief Jury & Evaluator",
+        image: "/juries/dr_m_saravanakumar.png",
+        bio: "Dean at Anna University Regional Campus Coimbatore, driving academic leadership, technological innovation, and empowering the next generation of engineers."
+      },
+      {
+        name: "Reinard Abhishek J",
+        title: "HR",
+        company: "ELRO Tech",
+        badge: "Official Jury",
+        image: "/juries/jury_3.jpeg",
+        bio: "HR at ELRO Tech, empowering talent acquisition, organizational growth, and human resources strategy."
+      },
+      {
+        name: "Dr. A. Kumar",
+        title: "Dean – Projects & Student Affairs / Head of AI & DS",
+        company: "RVS College of Engineering and Technology",
+        badge: "Chief Guest",
+        image: "/juries/dr_a_kumar.jpeg",
+        bio: "Dean – Projects & Student Affairs and Head of AI & DS at RVS College of Engineering and Technology, fostering academic innovation and advanced AI research."
+      }
+    ],
+    organizers: [
+      { name: "Ezhil K K", role: "CEO", image: "/images/ezhil.jpg.jpeg", linkedin: "https://www.linkedin.com/in/ezhilkathirvelan/" },
+      { name: "K Guru Prakash", role: "CTO", image: "/images/guru.jpg.jpeg", linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/" },
+      { name: "Rithika S", role: "COO", image: "/images/rithika.jpg.jpeg", linkedin: "https://www.linkedin.com/in/rithika-somasundaram/" },
+      { name: "Shubaashree S", role: "CMO", image: "/images/shubaashree.jpg.jpeg", linkedin: "https://www.linkedin.com/in/shubaashreesureshbabu/" }
+    ],
+    sponsors: [
+      { name: "Featherless AI", tier: "AI Compute Partner", logo: "Featherless AI", color: "#61C8D4", image: "/images/sponsors/featherlessai.jpeg" },
+      { name: "ELRO Tech", tier: "Corporate Partner", logo: "ELRO Tech", color: "#D4A843", image: "/images/sponsors/elro.jpeg" },
+      { name: "LeSuccess", tier: "Ecosystem Partner", logo: "LeSuccess", color: "#FF6C37", image: "/images/sponsors/lesuccess.png" },
+      { name: "DELYON", tier: "Partner Sponsor", logo: "DELYON", color: "#3ECF8E", image: "/images/sponsors/delyon.png" },
+      { name: "ELYON Clothing", tier: "Merchandise Partner", logo: "ELYON", color: "#3ECF8E", image: "/images/sponsors/elyon.jpeg" },
+      { name: "HackHere", tier: "Presenting Partner", logo: "HackHere", color: "#FF2D5D", image: "/images/sponsors/hackhere.png" }
+    ],
+    gallery: [],
     winnerProjectIds: [],
     hideWinningProjects: true
   },
@@ -717,7 +717,7 @@ export const eventsData = [
 ];
 
 export const SAMPLE_EVENTS = eventsData;
-export const FEATURED_EVENT = eventsData.find(e => e.id === "quantexa") || eventsData.find(e => e.category === "upcoming-hackathon") || eventsData[0];
+export const FEATURED_EVENT = eventsData.find(e => e.id === "hack-the-cloud") || eventsData.find(e => e.category === "upcoming-hackathon") || eventsData[0];
 
 // =========================================================================
 // PROJECTS DATA STORE (Exactly 4 Projects & 2-3 Categories)

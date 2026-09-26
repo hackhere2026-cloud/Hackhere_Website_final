@@ -112,7 +112,7 @@ export default function HomePage() {
   const [activeKeyword, setActiveKeyword] = useState("BUILD");
 
   // Upcoming Flagship Hackathon preview
-  const upcomingEvent = eventsData.find((e) => e.category === "upcoming-hackathon") || eventsData[2];
+  const upcomingEvent = eventsData.find((e) => e.category === "upcoming-hackathon") || eventsData.find((e) => e.id === "hack-the-cloud") || eventsData[0];
 
   // 2 Featured Showcase Projects
   const featuredProjects = projectsData.slice(0, 2);
