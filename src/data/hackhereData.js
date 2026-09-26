@@ -179,7 +179,7 @@ export const eventsData = [
     ],
     organizers: [
       { name: "EZHIL KK", role: "Sponsor & Communication Lead", image: "/images/ezhil.jpg.jpeg", linkedin: "https://www.linkedin.com/in/kk-ezhil-6a31a6235/" },
-      { name: "K GURU PRAKASH", role: "Developer Team Lead", image: "/images/guru.jpg.jpeg", linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/" },
+      { name: "K GURU PRAKASH", role: "CTO", image: "/images/guru.jpg.jpeg", linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/" },
       { name: "RITHIKA S", role: "Social Media & Content Lead", image: "/images/rithika.jpg.jpeg", linkedin: "https://www.linkedin.com/in/rithika-somasundaram/" },
       { name: "SHUBAASHREE S", role: "Outreach & Content Lead", image: "/images/shubaashree.jpg.jpeg", linkedin: "https://www.linkedin.com/in/shubaashreesureshbabu" }
     ],
@@ -279,7 +279,7 @@ export const eventsData = [
       { name: "SHUBAASHREE S", role: "Outreach & Content Lead", image: "/images/shubaashree.jpg.jpeg", linkedin: "https://www.linkedin.com/in/shubaashreesureshbabu" },
       { name: "RITHIKA S", role: "Social Media & Content Lead", image: "/images/rithika.jpg.jpeg", linkedin: "https://www.linkedin.com/in/rithika-somasundaram/" },
       { name: "EZHIL KK", role: "Sponsor & Communication Lead", image: "/images/ezhil.jpg.jpeg", linkedin: "https://www.linkedin.com/in/kk-ezhil-6a31a6235/" },
-      { name: "K GURU PRAKASH", role: "Developer Team Lead", image: "/images/guru.jpg.jpeg", linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/" }
+      { name: "K GURU PRAKASH", role: "CTO", image: "/images/guru.jpg.jpeg", linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/" }
     ],
     sponsors: [
       { name: "FeatherlessAI", tier: "Official Partner", logo: "FeatherlessAI", color: "#61C8D4", image: "/images/sponsors/featherlessai.jpeg" },
@@ -881,7 +881,7 @@ export const projectsData = [
     ],
     techStack: ["React Native", "FastAPI", "Whisper Small", "Gemini 1.5 API", "SQLite"],
     team: [
-      { name: "Aravind Raman", role: "AI & ML Engineer", avatar: "/founders/guru-prakash.jpeg" },
+      { name: "Aravind Raman", role: "AI & ML Engineer", avatar: "/images/antony.jpeg" },
       { name: "Divya Krishnan", role: "Mobile Lead", avatar: "/founders/rithika-s.jpeg" },
       { name: "Siddharth Rao", role: "Systems & Backend", avatar: "/founders/ezhil-kk.jpeg" }
     ],
@@ -949,10 +949,10 @@ export const communityFounders = [
   {
     id: "02",
     slot: "FOUNDER 02",
-    name: "Guru Prakash",
-    role: "Founder / Co-Founder",
+    name: "K Guru Prakash",
+    role: "Co-Founder & CTO",
     image: "/founders/guru-prakash.jpeg",
-    linkedin: "https://linkedin.com"
+    linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/"
   },
   {
     id: "03",
@@ -1255,7 +1255,7 @@ export const MENTORS_AND_SPEAKERS = [
     role: "Principal AI Scientist",
     organization: "Cognitive Labs",
     expertise: ["Generative AI", "Computer Vision", "MLOps"],
-    avatar: "/founders/guru-prakash.jpeg"
+    avatar: "/images/juries/kaushik.jpeg"
   },
   {
     id: "m-2",
