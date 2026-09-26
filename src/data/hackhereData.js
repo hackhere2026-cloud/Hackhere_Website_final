@@ -593,6 +593,84 @@ export const eventsData = [
     hideWinningProjects: true
   },
   {
+    id: "trivora",
+    title: "TRIVORA 2026",
+    tagline: "Three Dimensions of Innovation. One Crucible. — The Tri-Track Hackathon",
+    category: "upcoming-hackathon",
+    type: "Hackathon",
+    date: "Dates To Be Announced",
+    location: "Venue To Be Announced",
+    status: "Details Locked",
+    isLocked: true,
+    heroImage: "/trivora/trivora_banner.jpg",
+    registrationUrl: "",
+    description: "TRIVORA 2026 is HackHere's upcoming locked flagship hackathon. Centered across three breakthrough technology frontiers, squads will engineer, innovate, and deploy solutions under real-time industry evaluation. Official dates, venue coordinates, problem statements, and registration timelines are currently locked and will be unveiled soon.",
+    aboutLong: "TRIVORA 2026 is an upcoming high-impact hackathon crucible presented by HackHere. Bringing together ambitious developers, designers, and engineers across three core innovation tracks, squads will build production-grade prototypes under the mentorship of top industry leaders. All dates, venue details, challenge problem statements, jury panel, and prize allocations are currently locked pending official release.",
+    prizePool: "To Be Announced",
+    track: "Tri-Track Innovation",
+    participants: "To Be Announced",
+    venueFull: "Venue Coordinates To Be Unlocked",
+    venueMapUrl: "",
+    stats: [
+      { label: "Sprint Duration", value: "24 Hours" },
+      { label: "Prize Pool", value: "Locked Slot 🔒" },
+      { label: "Challenge Focus", value: "Tri-Track Systems" },
+      { label: "Host City", value: "Announcing Soon" },
+      { label: "Status", value: "Locked" }
+    ],
+    tracks: [
+      {
+        title: "Track 01: Core Systems & Autonomous AI (Locked)",
+        desc: "Challenge domain scope, problem statements, and technical requirements are currently locked pending official reveal.",
+        isLocked: true,
+        status: "LOCKED DOMAIN"
+      },
+      {
+        title: "Track 02: Decentralized Web3 & Protocols (Locked)",
+        desc: "Challenge domain scope, problem statements, and technical requirements are currently locked pending official reveal.",
+        isLocked: true,
+        status: "LOCKED DOMAIN"
+      },
+      {
+        title: "Track 03: Quantum Computing & Deep Tech (Locked)",
+        desc: "Challenge domain scope, problem statements, and technical requirements are currently locked pending official reveal.",
+        isLocked: true,
+        status: "LOCKED DOMAIN"
+      }
+    ],
+    prizes: [
+      { title: "Grand Champion Cash Pool", amount: "Locked Slot 🔒", badge: "Revealing Soon" },
+      { title: "Direct Hiring & Internship Offers", amount: "Partner Roles 🔒", badge: "Fast-Track" },
+      { title: "Ecosystem Grants & Swag", amount: "Partner Grants 🔒", badge: "All Participants" }
+    ],
+    agenda: [
+      { time: "Phase 1", title: "Portal Launch & Registration", desc: "Official launch announcement and team registration opening (Unlocking Soon)." },
+      { time: "Phase 2", title: "Problem Statements Release", desc: "Official release of challenge problem statements across all three tracks." },
+      { time: "Phase 3", title: "24-Hour Offline Grand Finale", desc: "24-hour non-stop prototyping sprint with live technical mentorship." },
+      { time: "Phase 4", title: "Stage Pitches & Awards Ceremony", desc: "Live prototype demonstration to jury panel followed by grand awards distribution." }
+    ],
+    chiefGuests: [
+      { name: "Position Locked", title: "Chief Evaluator & Industry Mentor", company: "To Be Revealed Soon", image: "/images/hackhere-logo.jpeg", isLocked: true },
+      { name: "Position Locked", title: "Technical Director & Hiring Lead", company: "To Be Revealed Soon", image: "/images/hackhere-logo.jpeg", isLocked: true },
+      { name: "Position Locked", title: "Venture Partner & Jury Lead", company: "To Be Revealed Soon", image: "/images/hackhere-logo.jpeg", isLocked: true }
+    ],
+    organizers: [
+      { name: "Ezhil K K", role: "CEO", image: "/images/ezhil.jpg.jpeg", linkedin: "https://www.linkedin.com/in/ezhilkathirvelan/" },
+      { name: "K Guru Prakash", role: "CTO", image: "/images/guru.jpg.jpeg", linkedin: "https://www.linkedin.com/in/k-guru-prakash-9a4184337/" },
+      { name: "Rithika S", role: "COO", image: "/images/rithika.jpg.jpeg", linkedin: "https://www.linkedin.com/in/rithika-somasundaram/" },
+      { name: "Shubaashree S", role: "CMO", image: "/images/shubaashree.jpg.jpeg", linkedin: "https://www.linkedin.com/in/shubaashreesureshbabu/" }
+    ],
+    sponsors: [
+      { name: "Maestrominds", tier: "Powered By", logo: "Maestrominds", color: "#FF6C37", image: "/images/sponsors/maestrominds.png" },
+      { name: "Partner Slot Locked", tier: "Title Sponsor Partner", logo: "Locked", color: "#61C8D4", isLocked: true },
+      { name: "Partner Slot Locked", tier: "Ecosystem Partner", logo: "Locked", color: "#61C8D4", isLocked: true },
+      { name: "HackHere", tier: "Presenting Partner", logo: "HackHere", color: "#FF2D5D", image: "/images/sponsors/hackhere.png" }
+    ],
+    gallery: [],
+    winnerProjectIds: [],
+    hideWinningProjects: true
+  },
+  {
     id: "bootcamp-hedera-web3",
     title: "Hedera × Hashgraph Association Bootcamp",
     tagline: "“Learn Beyond the Hackathon.” — 3-Day Blockchain & Enterprise Web3 Bootcamp",

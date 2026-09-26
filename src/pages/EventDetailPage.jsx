@@ -29,7 +29,7 @@ export default function EventDetailPage() {
   const event = eventsData.find((e) => e.id === id || (id === "hack-to-hire" && (e.id === "hack-the-cloud" || e.id === "hack-to-hire")) || (id === "hack-the-cloud" && (e.id === "hack-to-hire" || e.id === "hack-the-cloud"))) || eventsData[0];
 
   // Associated winning projects
-  const winnerProjects = (event.id === "aiventra" || event.id === "vortexa" || event.id === "nexora" || event.id === "quantexa" || event.id === "hack-the-cloud" || event.id === "hack-to-hire" || event.hideWinningProjects)
+  const winnerProjects = (event.id === "aiventra" || event.id === "vortexa" || event.id === "nexora" || event.id === "quantexa" || event.id === "hack-the-cloud" || event.id === "hack-to-hire" || event.id === "trivora" || event.hideWinningProjects)
     ? []
     : projectsData.filter((p) =>
         event.winnerProjectIds?.includes(p.id)
